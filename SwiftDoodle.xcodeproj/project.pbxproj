@@ -8,15 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		F66429121FBF27B100317721 /* SwiftDoodle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; };
-		F66429171FBF27B100317721 /* SwiftDoodleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66429161FBF27B100317721 /* SwiftDoodleTests.swift */; };
 		F66429191FBF27B100317721 /* SwiftDoodle.h in Headers */ = {isa = PBXBuildFile; fileRef = F664290B1FBF27B100317721 /* SwiftDoodle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F66429291FBF286F00317721 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66429281FBF286F00317721 /* AppDelegate.swift */; };
 		F664292B1FBF286F00317721 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F664292A1FBF286F00317721 /* ViewController.swift */; };
 		F664292E1FBF286F00317721 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F664292C1FBF286F00317721 /* Main.storyboard */; };
 		F66429301FBF286F00317721 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F664292F1FBF286F00317721 /* Assets.xcassets */; };
 		F66429331FBF286F00317721 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F66429311FBF286F00317721 /* LaunchScreen.storyboard */; };
-		F664293E1FBF286F00317721 /* SwiftDoodleDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F664293D1FBF286F00317721 /* SwiftDoodleDemoTests.swift */; };
-		F66429491FBF286F00317721 /* SwiftDoodleDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66429481FBF286F00317721 /* SwiftDoodleDemoUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +45,6 @@
 		F664290B1FBF27B100317721 /* SwiftDoodle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftDoodle.h; sourceTree = "<group>"; };
 		F664290C1FBF27B100317721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F66429111FBF27B100317721 /* SwiftDoodleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDoodleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F66429161FBF27B100317721 /* SwiftDoodleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDoodleTests.swift; sourceTree = "<group>"; };
 		F66429181FBF27B100317721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F66429261FBF286F00317721 /* SwiftDoodleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDoodleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F66429281FBF286F00317721 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,10 +54,8 @@
 		F66429321FBF286F00317721 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F66429341FBF286F00317721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F66429391FBF286F00317721 /* SwiftDoodleDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDoodleDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F664293D1FBF286F00317721 /* SwiftDoodleDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDoodleDemoTests.swift; sourceTree = "<group>"; };
 		F664293F1FBF286F00317721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F66429441FBF286F00317721 /* SwiftDoodleDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDoodleDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F66429481FBF286F00317721 /* SwiftDoodleDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDoodleDemoUITests.swift; sourceTree = "<group>"; };
 		F664294A1FBF286F00317721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,7 +135,6 @@
 		F66429151FBF27B100317721 /* SwiftDoodleTests */ = {
 			isa = PBXGroup;
 			children = (
-				F66429161FBF27B100317721 /* SwiftDoodleTests.swift */,
 				F66429181FBF27B100317721 /* Info.plist */,
 			);
 			path = SwiftDoodleTests;
@@ -163,7 +156,6 @@
 		F664293C1FBF286F00317721 /* SwiftDoodleDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				F664293D1FBF286F00317721 /* SwiftDoodleDemoTests.swift */,
 				F664293F1FBF286F00317721 /* Info.plist */,
 			);
 			path = SwiftDoodleDemoTests;
@@ -172,7 +164,6 @@
 		F66429471FBF286F00317721 /* SwiftDoodleDemoUITests */ = {
 			isa = PBXGroup;
 			children = (
-				F66429481FBF286F00317721 /* SwiftDoodleDemoUITests.swift */,
 				F664294A1FBF286F00317721 /* Info.plist */,
 			);
 			path = SwiftDoodleDemoUITests;
@@ -200,6 +191,7 @@
 				F66429041FBF27B100317721 /* Frameworks */,
 				F66429051FBF27B100317721 /* Headers */,
 				F66429061FBF27B100317721 /* Resources */,
+				F66429541FBF28E200317721 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -235,6 +227,7 @@
 				F66429221FBF286F00317721 /* Sources */,
 				F66429231FBF286F00317721 /* Frameworks */,
 				F66429241FBF286F00317721 /* Resources */,
+				F66429551FBF28FF00317721 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -378,6 +371,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F66429541FBF28E200317721 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		F66429551FBF28FF00317721 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F66429031FBF27B100317721 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -390,7 +414,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F66429171FBF27B100317721 /* SwiftDoodleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +430,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F664293E1FBF286F00317721 /* SwiftDoodleDemoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,7 +437,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F66429491FBF286F00317721 /* SwiftDoodleDemoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,17 +597,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = MDX989Y6D8;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SwiftDoodle/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rep.SwiftDoodle;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -597,17 +621,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = MDX989Y6D8;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SwiftDoodle/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rep.SwiftDoodle;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
