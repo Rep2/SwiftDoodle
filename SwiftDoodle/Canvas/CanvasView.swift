@@ -6,13 +6,6 @@ public class CanvasView: UIView {
     let isPredictionEnabled = UIDevice.current.userInterfaceIdiom == .pad
     let isTouchUpdatingEnabled = true
 
-    var usePreciseLocations = true {
-        didSet {
-            needsFullRedraw = true
-            setNeedsDisplay()
-        }
-    }
-
     var needsFullRedraw = true
 
     /// Array containing all line objects that need to be drawn in `drawRect(_:)`.
@@ -47,11 +40,19 @@ public class CanvasView: UIView {
 
         size.width *= scale
         size.height *= scale
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
 
-        let context = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
+        let context = CGContext(
+            data: nil,
+            width: Int(size.width),
+            height: Int(size.height),
+            bitsPerComponent: 8,
+            bytesPerRow: 0,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        )!
 
         context.setLineCap(.round)
+
         let transform = CGAffineTransform(scaleX: scale, y: scale)
         context.concatenate(transform)
 
@@ -64,29 +65,31 @@ public class CanvasView: UIView {
     // MARK: Drawing
 
     override public func draw(_ rect: CGRect) {
-        let context = UIGraphicsGetCurrentContext()!
+        if let context = UIGraphicsGetCurrentContext() {
+            context.setLineCap(.round)
 
-        context.setLineCap(.round)
+            if needsFullRedraw {
+                setFrozenImageNeedsUpdate()
+                frozenContext.clear(bounds)
 
-        if needsFullRedraw {
-            setFrozenImageNeedsUpdate()
-            frozenContext.clear(bounds)
-            for array in [finishedLines, lines] {
-                for line in array {
-                    line.drawCommitedPointsInContext(context: frozenContext, usePreciseLocation: usePreciseLocations)
+                for array in [finishedLines, lines] {
+                    for line in array {
+                        line.drawCommitedPointsInContext(context: frozenContext)
+                    }
                 }
+
+                needsFullRedraw = false
             }
-            needsFullRedraw = false
-        }
 
-        frozenImage = frozenImage ?? frozenContext.makeImage()
+            frozenImage = frozenImage ?? frozenContext.makeImage()
 
-        if let frozenImage = frozenImage {
-            context.draw(frozenImage, in: bounds)
-        }
+            if let frozenImage = frozenImage {
+                context.draw(frozenImage, in: bounds)
+            }
 
-        for line in lines {
-            line.drawInContext(context: context, usePreciseLocation: usePreciseLocations)
+            for line in lines {
+                context.draw(points: line.points)
+            }
         }
     }
 
@@ -251,13 +254,13 @@ public class CanvasView: UIView {
 
     func commitLine(line: Line) {
         // Have the line draw any segments between points no longer being updated into the `frozenContext` and remove them from the line.
-        line.drawFixedPointsInContext(context: frozenContext, usePreciseLocation: usePreciseLocations)
+        line.drawFixedPointsInContext(context: frozenContext)
         setFrozenImageNeedsUpdate()
     }
 
     func finishLine(line: Line) {
         // Have the line draw any remaining segments into the `frozenContext`. All should be fixed now.
-        line.drawFixedPointsInContext(context: frozenContext, usePreciseLocation: usePreciseLocations, commitAll: true)
+        line.drawFixedPointsInContext(context: frozenContext, commitAll: true)
         setFrozenImageNeedsUpdate()
 
         // Cease tracking this line now that it is finished.

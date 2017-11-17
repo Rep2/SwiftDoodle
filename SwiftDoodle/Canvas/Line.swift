@@ -3,7 +3,7 @@ import UIKit
 class Line: NSObject {
     // MARK: Properties
 
-    // The live line.
+    // The live line
     var points = [LinePoint]()
 
     // Use the estimation index of the touch to track points awaiting updates.
@@ -17,7 +17,7 @@ class Line: NSObject {
     }
 
     func updateWithTouch(touch: UITouch) -> (Bool, CGRect) {
-        if  let estimationUpdateIndex = touch.estimationUpdateIndex,
+        if let estimationUpdateIndex = touch.estimationUpdateIndex,
             let point = pointsWaitingForUpdatesByEstimationIndex[estimationUpdateIndex] {
             var rect = updateRectForExistingPoint(point: point)
             let didUpdate = point.updateWithTouch(touch: touch)
@@ -95,48 +95,7 @@ class Line: NSObject {
 
     // MARK: Drawing
 
-    func drawInContext(context: CGContext, usePreciseLocation: Bool) {
-        var maybePriorPoint: LinePoint?
-
-        for point in points {
-            guard let priorPoint = maybePriorPoint else {
-                maybePriorPoint = point
-                continue
-            }
-
-            // This color will used by default for `.Standard` touches.
-            var color = UIColor.black
-
-            let pointType = point.pointType
-
-            if pointType.contains(.Cancelled) {
-                color = UIColor.clear
-            } else if pointType.contains(.Finger) {
-                color = UIColor.purple
-            }
-            
-            if pointType.contains(.Predicted) && !pointType.contains(.Cancelled) {
-                color = color.withAlphaComponent(0.5)
-            }
-
-            let location = usePreciseLocation ? point.preciseLocation : point.location
-            let priorLocation = usePreciseLocation ? priorPoint.preciseLocation : priorPoint.location
-
-            context.setStrokeColor(color.cgColor)
-
-            context.beginPath()
-
-            context.move(to: CGPoint(x: priorLocation.x, y: priorLocation.y))
-            context.addLine(to: CGPoint(x: location.x, y: location.y))
-
-            context.setLineWidth(point.magnitude)
-            context.strokePath()
-
-            maybePriorPoint = point
-        }
-    }
-
-    func drawFixedPointsInContext(context: CGContext, usePreciseLocation: Bool, commitAll: Bool = false) {
+    func drawFixedPointsInContext(context: CGContext, commitAll: Bool = false) {
         let allPoints = points
         var committing = [LinePoint]()
 
@@ -163,7 +122,7 @@ class Line: NSObject {
 
         let committedLine = Line()
         committedLine.points = committing
-        committedLine.drawInContext(context: context, usePreciseLocation: usePreciseLocation)
+        context.draw(points: points)
 
         if !committedPoints.isEmpty {
             // Remove what was the last point committed point; it is also the first point being committed now.
@@ -174,10 +133,10 @@ class Line: NSObject {
         committedPoints.append(contentsOf: committing)
     }
 
-    func drawCommitedPointsInContext(context: CGContext, usePreciseLocation: Bool) {
+    func drawCommitedPointsInContext(context: CGContext) {
         let committedLine = Line()
         committedLine.points = committedPoints
-        committedLine.drawInContext(context: context, usePreciseLocation: usePreciseLocation)
+        context.draw(points: points)
     }
 
     // MARK: Convenience
@@ -217,9 +176,11 @@ class Line: NSObject {
         if arrayIndex > 0 {
             rect = rect.union(updateRectForLinePoint(point: point, previousPoint: points[arrayIndex - 1]))
         }
+
         if arrayIndex + 1 < points.count {
             rect = rect.union(updateRectForLinePoint(point: point, previousPoint: points[arrayIndex + 1]))
         }
+
         return rect
     }
 

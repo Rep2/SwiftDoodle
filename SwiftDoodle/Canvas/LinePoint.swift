@@ -101,4 +101,16 @@ class LinePoint: NSObject {
 
         return true
     }
+
+    var color: UIColor {
+        var color = UIColor.black
+
+        if pointType.contains(.Cancelled) {
+            color = .clear
+        } else if pointType.contains(.Predicted) {
+            color = color.withAlphaComponent(0.5)
+        }
+
+        return color
+    }
 }
