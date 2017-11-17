@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F65F00C31FBF2C5C00B55058 /* SwiftDoodle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; };
+		F65F00C41FBF2C5C00B55058 /* SwiftDoodle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F66429121FBF27B100317721 /* SwiftDoodle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; };
 		F66429191FBF27B100317721 /* SwiftDoodle.h in Headers */ = {isa = PBXBuildFile; fileRef = F664290B1FBF27B100317721 /* SwiftDoodle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F66429291FBF286F00317721 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66429281FBF286F00317721 /* AppDelegate.swift */; };
@@ -14,9 +16,17 @@
 		F664292E1FBF286F00317721 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F664292C1FBF286F00317721 /* Main.storyboard */; };
 		F66429301FBF286F00317721 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F664292F1FBF286F00317721 /* Assets.xcassets */; };
 		F66429331FBF286F00317721 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F66429311FBF286F00317721 /* LaunchScreen.storyboard */; };
+		F66429581FBF2AD900317721 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66429571FBF2AD900317721 /* CanvasView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F65F00C51FBF2C5C00B55058 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F66428FF1FBF27B100317721 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F66429071FBF27B100317721;
+			remoteInfo = SwiftDoodle;
+		};
 		F66429131FBF27B100317721 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F66428FF1FBF27B100317721 /* Project object */;
@@ -40,6 +50,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F65F00C71FBF2C5C00B55058 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F65F00C41FBF2C5C00B55058 /* SwiftDoodle.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		F66429081FBF27B100317721 /* SwiftDoodle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftDoodle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F664290B1FBF27B100317721 /* SwiftDoodle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftDoodle.h; sourceTree = "<group>"; };
@@ -57,6 +81,7 @@
 		F664293F1FBF286F00317721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F66429441FBF286F00317721 /* SwiftDoodleDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDoodleDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F664294A1FBF286F00317721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F66429571FBF2AD900317721 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F65F00C31FBF2C5C00B55058 /* SwiftDoodle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +152,7 @@
 		F664290A1FBF27B100317721 /* SwiftDoodle */ = {
 			isa = PBXGroup;
 			children = (
+				F66429561FBF2AC500317721 /* Canvas */,
 				F664290B1FBF27B100317721 /* SwiftDoodle.h */,
 				F664290C1FBF27B100317721 /* Info.plist */,
 			);
@@ -167,6 +194,14 @@
 				F664294A1FBF286F00317721 /* Info.plist */,
 			);
 			path = SwiftDoodleDemoUITests;
+			sourceTree = "<group>";
+		};
+		F66429561FBF2AC500317721 /* Canvas */ = {
+			isa = PBXGroup;
+			children = (
+				F66429571FBF2AD900317721 /* CanvasView.swift */,
+			);
+			path = Canvas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,10 +263,12 @@
 				F66429231FBF286F00317721 /* Frameworks */,
 				F66429241FBF286F00317721 /* Resources */,
 				F66429551FBF28FF00317721 /* Swiftlint */,
+				F65F00C71FBF2C5C00B55058 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F65F00C61FBF2C5C00B55058 /* PBXTargetDependency */,
 			);
 			name = SwiftDoodleDemo;
 			productName = SwiftDoodleDemo;
@@ -286,6 +323,7 @@
 				TargetAttributes = {
 					F66429071FBF27B100317721 = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 					F66429101FBF27B100317721 = {
@@ -407,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F66429581FBF2AD900317721 /* CanvasView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +482,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F65F00C61FBF2C5C00B55058 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F66429071FBF27B100317721 /* SwiftDoodle */;
+			targetProxy = F65F00C51FBF2C5C00B55058 /* PBXContainerItemProxy */;
+		};
 		F66429141FBF27B100317721 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F66429071FBF27B100317721 /* SwiftDoodle */;
@@ -596,11 +640,12 @@
 		F664291D1FBF27B100317721 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MDX989Y6D8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -612,6 +657,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -620,11 +666,12 @@
 		F664291E1FBF27B100317721 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MDX989Y6D8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -644,6 +691,7 @@
 		F66429201FBF27B100317721 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MDX989Y6D8;
 				INFOPLIST_FILE = SwiftDoodleTests/Info.plist;
@@ -658,6 +706,7 @@
 		F66429211FBF27B100317721 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MDX989Y6D8;
 				INFOPLIST_FILE = SwiftDoodleTests/Info.plist;
@@ -672,6 +721,7 @@
 		F664294C1FBF286F00317721 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MDX989Y6D8;
@@ -687,6 +737,7 @@
 		F664294D1FBF286F00317721 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MDX989Y6D8;
