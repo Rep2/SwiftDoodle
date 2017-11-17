@@ -1,6 +1,6 @@
 import UIKit
 
-class CanvasView: UIView {
+public class CanvasView: UIView {
     // MARK: Properties
 
     let isPredictionEnabled = UIDevice.current.userInterfaceIdiom == .pad
@@ -63,7 +63,7 @@ class CanvasView: UIView {
 
     // MARK: Drawing
 
-    override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()!
 
         context.setLineCap(.round)

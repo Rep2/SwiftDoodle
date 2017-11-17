@@ -5,6 +5,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view = CanvasView(frame: view.frame)
+        view = DrawView(frame: view.frame)
+        view.backgroundColor = .white
     }
 }
