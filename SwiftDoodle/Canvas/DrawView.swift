@@ -19,6 +19,6 @@ public class DrawView: CanvasView {
     }
 
     override public func touchesEstimatedPropertiesUpdated(_ touches: Set<UITouch>) {
-        updateEstimatedPropertiesForTouches(touches: touches)
+//        updateEstimatedPropertiesForTouches(touches: touches)
     }
 }

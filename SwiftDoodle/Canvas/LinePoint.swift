@@ -11,14 +11,13 @@ class LinePoint: NSObject {
         static let Cancelled = PointType(rawValue: 1 << 4)
         static let Finger = PointType(rawValue: 1 << 5)
 
-        static let touchUpdateProperties: [UITouchProperties] = [.altitude, .azimuth, .force, .location]
+        static let touchUpdateProperties: [UITouchProperties] = [.altitude, .azimuth, .location]
     }
 
     // MARK: Properties
 
     var sequenceNumber: Int
     let timestamp: TimeInterval
-    var force: CGFloat
     var location: CGPoint
     var estimatedPropertiesExpectingUpdates: UITouchProperties
     var estimatedProperties: UITouchProperties
@@ -29,21 +28,7 @@ class LinePoint: NSObject {
 
     var pointType: PointType
 
-    var magnitude: CGFloat {
-        return max(force, 0.025)
-    }
-
-    var color: UIColor {
-        var color = UIColor.black
-
-        if pointType.contains(.Cancelled) {
-            color = .clear
-        } else if pointType.contains(.Predicted) {
-            color = color.withAlphaComponent(0.5)
-        }
-
-        return color
-    }
+    var drawWidth: CGFloat = 1
 
     // MARK: Initialization
 
@@ -52,14 +37,13 @@ class LinePoint: NSObject {
         self.type = touch.type
         self.pointType = pointType
 
-        timestamp = touch.timestamp
         let view = touch.view
         location = touch.preciseLocation(in: view)
         azimuthAngle = touch.azimuthAngle(in: view)
         estimatedProperties = touch.estimatedProperties
         estimatedPropertiesExpectingUpdates = touch.estimatedPropertiesExpectingUpdates
         altitudeAngle = touch.altitudeAngle
-        force = (type == .stylus || touch.force > 0) ? touch.force : 1.0
+        timestamp = touch.timestamp
 
         if !estimatedPropertiesExpectingUpdates.isEmpty {
             self.pointType.formUnion(.NeedsUpdate)
@@ -67,7 +51,11 @@ class LinePoint: NSObject {
 
         estimationUpdateIndex = touch.estimationUpdateIndex
     }
+}
 
+// MARK: Estimated properties
+
+extension LinePoint {
     func updateWithTouch(touch: UITouch) -> Bool {
         guard let estimationUpdateIndex = touch.estimationUpdateIndex, estimationUpdateIndex == estimationUpdateIndex else { return false }
 
@@ -97,8 +85,6 @@ class LinePoint: NSObject {
 
     func update(touchProperty: UITouchProperties, touch: UITouch) {
         switch touchProperty {
-        case .force:
-            force = touch.force
         case .azimuth:
             azimuthAngle = touch.azimuthAngle(in: touch.view)
         case .altitude:
@@ -107,6 +93,35 @@ class LinePoint: NSObject {
             location = touch.preciseLocation(in: touch.view)
         default:
             break
+        }
+    }
+}
+
+// MARK: Convenience
+
+extension LinePoint {
+    var centerRect: CGRect {
+        return CGRect(origin: location, size: .zero)
+    }
+
+    var drawRect: CGRect {
+        return centerRect
+            .insetBy(dx: -drawWidth, dy: -drawWidth)
+    }
+
+    func drawRect(withPreviousPoint previousPoint: LinePoint) -> CGRect {
+        return centerRect
+            .union(previousPoint.centerRect)
+            .insetBy(dx: -drawWidth, dy: -drawWidth)
+    }
+
+    var drawColor: UIColor {
+        if pointType.contains(.Cancelled) {
+            return .clear
+        } else if pointType.contains(.Predicted) {
+            return UIColor.black.withAlphaComponent(0.5)
+        } else {
+            return .black
         }
     }
 }

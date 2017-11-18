@@ -16,40 +16,20 @@ class Line: NSObject {
         return pointsWaitingForUpdatesByEstimationIndex.isEmpty
     }
 
-    func updateWithTouch(touch: UITouch) -> (Bool, CGRect) {
-        if let estimationUpdateIndex = touch.estimationUpdateIndex,
-            let point = pointsWaitingForUpdatesByEstimationIndex[estimationUpdateIndex] {
-            var rect = updateRectForExistingPoint(point: point)
-            let didUpdate = point.updateWithTouch(touch: touch)
-            if didUpdate {
-                rect = rect.union(updateRectForExistingPoint(point: point))
-            }
-            if point.estimatedPropertiesExpectingUpdates == [] {
-                pointsWaitingForUpdatesByEstimationIndex.removeValue(forKey: estimationUpdateIndex)
-            }
-            return (didUpdate, rect)
-        }
-        return (false, CGRect.null)
-    }
-
     // MARK: Interface
 
     func addPointOfType(pointType: LinePoint.PointType, forTouch touch: UITouch) -> CGRect {
         let previousPoint = points.last
-        let previousSequenceNumber = previousPoint?.sequenceNumber ?? -1
-        let point = LinePoint(touch: touch, sequenceNumber: previousSequenceNumber + 1, pointType: pointType)
-
-        if let estimationIndex = point.estimationUpdateIndex {
-            if !point.estimatedPropertiesExpectingUpdates.isEmpty {
-                pointsWaitingForUpdatesByEstimationIndex[estimationIndex] = point
-            }
-        }
+        let point = LinePoint(touch: touch, sequenceNumber: points.count, pointType: pointType)
 
         points.append(point)
 
-        let updateRect = updateRectForLinePoint(point: point, previousPoint: previousPoint)
+        if let estimationIndex = point.estimationUpdateIndex, !point.estimatedPropertiesExpectingUpdates.isEmpty {
+            pointsWaitingForUpdatesByEstimationIndex[estimationIndex] = point
+        }
 
-        return updateRect
+        return points.flatMap { point.drawRect(withPreviousPoint: $0) } ??
+            point.drawRect
     }
 
     func removePointsWithType(type: LinePoint.PointType) -> CGRect {
@@ -60,10 +40,10 @@ class Line: NSObject {
             let keepPoint = !point.pointType.contains(type)
 
             if !keepPoint {
-                var rect = self.updateRectForLinePoint(point: point)
+                var rect = point.drawRect
 
                 if let priorPoint = priorPoint {
-                    rect = rect.union(updateRectForLinePoint(point: priorPoint))
+                    rect = rect.union(priorPoint.drawRect)
                 }
 
                 updateRect = updateRect.union(rect)
@@ -87,7 +67,7 @@ class Line: NSObject {
              Union the `CGRect` for this point with accumulated `CGRect` and return it. The result is
              supplied to the next invocation of the closure.
              */
-            return accumulated.union(updateRectForLinePoint(point: point))
+            return accumulated.union(point.drawRect)
         }
 
         return updateRect
@@ -138,50 +118,45 @@ class Line: NSObject {
         committedLine.points = committedPoints
         context.draw(points: points)
     }
+}
 
-    // MARK: Convenience
+// MARK: Estimated properties
 
-    func updateRectForLinePoint(point: LinePoint) -> CGRect {
-        var rect = CGRect(origin: point.location, size: CGSize.zero)
+extension Line {
+    func updateWithTouch(touch: UITouch) -> (Bool, CGRect) {
+        if let estimationUpdateIndex = touch.estimationUpdateIndex,
+            let point = pointsWaitingForUpdatesByEstimationIndex[estimationUpdateIndex] {
 
-        // The negative magnitude ensures an outset rectangle.
-        let magnitude = -3 * point.magnitude - 2
-        rect = rect.insetBy(dx: magnitude, dy: magnitude)
+            var rect = updateRectForExistingPoint(point: point)
+            let didUpdate = point.updateWithTouch(touch: touch)
 
-        return rect
-    }
+            if didUpdate {
+                rect = rect.union(updateRectForExistingPoint(point: point))
+            }
 
-    func updateRectForLinePoint(point: LinePoint, previousPoint optionalPreviousPoint: LinePoint? = nil) -> CGRect {
-        var rect = CGRect(origin: point.location, size: CGSize.zero)
+            if point.estimatedPropertiesExpectingUpdates == [] {
+                pointsWaitingForUpdatesByEstimationIndex.removeValue(forKey: estimationUpdateIndex)
+            }
 
-        var pointMagnitude = point.magnitude
-
-        if let previousPoint = optionalPreviousPoint {
-            pointMagnitude = max(pointMagnitude, previousPoint.magnitude)
-            rect = rect.union( CGRect(origin: previousPoint.location, size: CGSize.zero))
+            return (didUpdate, rect)
         }
 
-        // The negative magnitude ensures an outset rectangle.
-        let magnitude = -3.0 * pointMagnitude - 2.0
-        rect = rect.insetBy(dx: magnitude, dy: magnitude)
-
-        return rect
+        return (false, CGRect.null)
     }
 
     func updateRectForExistingPoint(point: LinePoint) -> CGRect {
-        var rect = updateRectForLinePoint(point: point)
+        var rect = point.drawRect
 
-        let arrayIndex = point.sequenceNumber - points.first!.sequenceNumber
+        let arrayIndex = point.sequenceNumber
 
         if arrayIndex > 0 {
-            rect = rect.union(updateRectForLinePoint(point: point, previousPoint: points[arrayIndex - 1]))
+            rect = rect.union(point.drawRect(withPreviousPoint: points[arrayIndex - 1]))
         }
 
         if arrayIndex + 1 < points.count {
-            rect = rect.union(updateRectForLinePoint(point: point, previousPoint: points[arrayIndex + 1]))
+            rect = rect.union(point.drawRect(withPreviousPoint: points[arrayIndex + 1]))
         }
 
         return rect
     }
-
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F65402DF1FC0DE8300A9E39B /* EstimatedPropertiesCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65402DE1FC0DE8300A9E39B /* EstimatedPropertiesCanvasView.swift */; };
 		F65F00C31FBF2C5C00B55058 /* SwiftDoodle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; };
 		F65F00C41FBF2C5C00B55058 /* SwiftDoodle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F65F00C91FBF5E0F00B55058 /* LinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F00C81FBF5E0F00B55058 /* LinePoint.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F65402DE1FC0DE8300A9E39B /* EstimatedPropertiesCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimatedPropertiesCanvasView.swift; sourceTree = "<group>"; };
 		F65F00C81FBF5E0F00B55058 /* LinePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePoint.swift; sourceTree = "<group>"; };
 		F65F00CA1FBF647800B55058 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		F65F00CC1FBF650100B55058 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				F65F00CA1FBF647800B55058 /* Line.swift */,
 				F65F00CC1FBF650100B55058 /* CanvasView.swift */,
 				F65F00CE1FBF66ED00B55058 /* DrawView.swift */,
+				F65402DE1FC0DE8300A9E39B /* EstimatedPropertiesCanvasView.swift */,
 			);
 			path = Canvas;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F65402DF1FC0DE8300A9E39B /* EstimatedPropertiesCanvasView.swift in Sources */,
 				F65F00CB1FBF647800B55058 /* Line.swift in Sources */,
 				F65F00C91FBF5E0F00B55058 /* LinePoint.swift in Sources */,
 				F65F00CF1FBF66ED00B55058 /* DrawView.swift in Sources */,
@@ -750,6 +754,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MDX989Y6D8;
 				INFOPLIST_FILE = SwiftDoodleDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rep.SwiftDoodleDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -766,6 +771,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MDX989Y6D8;
 				INFOPLIST_FILE = SwiftDoodleDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rep.SwiftDoodleDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
