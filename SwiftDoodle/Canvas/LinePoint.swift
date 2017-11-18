@@ -10,6 +10,8 @@ class LinePoint: NSObject {
         static let Updated = PointType(rawValue: 1 << 3)
         static let Cancelled = PointType(rawValue: 1 << 4)
         static let Finger = PointType(rawValue: 1 << 5)
+
+        static let touchUpdateProperties: [UITouchProperties] = [.altitude, .azimuth, .force, .location]
     }
 
     // MARK: Properties
@@ -18,7 +20,6 @@ class LinePoint: NSObject {
     let timestamp: TimeInterval
     var force: CGFloat
     var location: CGPoint
-    var preciseLocation: CGPoint
     var estimatedPropertiesExpectingUpdates: UITouchProperties
     var estimatedProperties: UITouchProperties
     let type: UITouchType
@@ -32,6 +33,18 @@ class LinePoint: NSObject {
         return max(force, 0.025)
     }
 
+    var color: UIColor {
+        var color = UIColor.black
+
+        if pointType.contains(.Cancelled) {
+            color = .clear
+        } else if pointType.contains(.Predicted) {
+            color = color.withAlphaComponent(0.5)
+        }
+
+        return color
+    }
+
     // MARK: Initialization
 
     init(touch: UITouch, sequenceNumber: Int, pointType: PointType) {
@@ -41,8 +54,7 @@ class LinePoint: NSObject {
 
         timestamp = touch.timestamp
         let view = touch.view
-        location = touch.location(in: view)
-        preciseLocation = touch.preciseLocation(in: view)
+        location = touch.preciseLocation(in: view)
         azimuthAngle = touch.azimuthAngle(in: view)
         estimatedProperties = touch.estimatedProperties
         estimatedPropertiesExpectingUpdates = touch.estimatedPropertiesExpectingUpdates
@@ -59,28 +71,9 @@ class LinePoint: NSObject {
     func updateWithTouch(touch: UITouch) -> Bool {
         guard let estimationUpdateIndex = touch.estimationUpdateIndex, estimationUpdateIndex == estimationUpdateIndex else { return false }
 
-        // An array of the touch properties that may be of interest.
-        let touchProperties: [UITouchProperties] = [.altitude, .azimuth, .force, .location]
-
         // Iterate through possible properties.
-        for expectedProperty in touchProperties {
-            // If an update to this property is not expected, continue to the next property.
-            guard !estimatedPropertiesExpectingUpdates.contains(expectedProperty) else { continue }
-
-            // Update the value of the point with the value from the touch's property.
-            switch expectedProperty {
-            case UITouchProperties.force:
-                force = touch.force
-            case UITouchProperties.azimuth:
-                azimuthAngle = touch.azimuthAngle(in: touch.view)
-            case UITouchProperties.altitude:
-                altitudeAngle = touch.altitudeAngle
-            case UITouchProperties.location:
-                location = touch.location(in: touch.view)
-                preciseLocation = touch.preciseLocation(in: touch.view)
-            default:
-                ()
-            }
+        for expectedProperty in PointType.touchUpdateProperties where estimatedPropertiesExpectingUpdates.contains(expectedProperty) {
+            update(touchProperty: expectedProperty, touch: touch)
 
             if !touch.estimatedProperties.contains(expectedProperty) {
                 // Flag that this point now has a 'final' value for this property.
@@ -102,15 +95,18 @@ class LinePoint: NSObject {
         return true
     }
 
-    var color: UIColor {
-        var color = UIColor.black
-
-        if pointType.contains(.Cancelled) {
-            color = .clear
-        } else if pointType.contains(.Predicted) {
-            color = color.withAlphaComponent(0.5)
+    func update(touchProperty: UITouchProperties, touch: UITouch) {
+        switch touchProperty {
+        case .force:
+            force = touch.force
+        case .azimuth:
+            azimuthAngle = touch.azimuthAngle(in: touch.view)
+        case .altitude:
+            altitudeAngle = touch.altitudeAngle
+        case .location:
+            location = touch.preciseLocation(in: touch.view)
+        default:
+            break
         }
-
-        return color
     }
 }

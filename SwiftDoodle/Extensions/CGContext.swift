@@ -10,8 +10,8 @@ extension CGContext {
 
                 beginPath()
 
-                move(to: CGPoint(x: point.preciseLocation.x, y: point.preciseLocation.y))
-                addLine(to: CGPoint(x: priorPoint.preciseLocation.x, y: priorPoint.preciseLocation.y))
+                move(to: CGPoint(x: point.location.x, y: point.location.y))
+                addLine(to: CGPoint(x: priorPoint.location.x, y: priorPoint.location.y))
 
                 setLineWidth(point.magnitude)
 
