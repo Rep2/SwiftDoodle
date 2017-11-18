@@ -19,7 +19,6 @@ class Line: NSObject {
     // MARK: Interface
 
     func addPointOfType(pointType: LinePoint.PointType, forTouch touch: UITouch) -> CGRect {
-        let previousPoint = points.last
         let point = LinePoint(touch: touch, sequenceNumber: points.count, pointType: pointType)
 
         points.append(point)
@@ -28,7 +27,7 @@ class Line: NSObject {
             pointsWaitingForUpdatesByEstimationIndex[estimationIndex] = point
         }
 
-        return points.flatMap { point.drawRect(withPreviousPoint: $0) } ??
+        return points[safeIndex: points.count - 2].flatMap { point.drawRect(withPreviousPoint: $0) } ??
             point.drawRect
     }
 
