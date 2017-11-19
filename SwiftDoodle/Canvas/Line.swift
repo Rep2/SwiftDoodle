@@ -6,11 +6,11 @@ class Line: NSObject {
     // The live line
     var points = [LinePoint]()
 
-    // Use the estimation index of the touch to track points awaiting updates.
-    var pointsWaitingForUpdatesByEstimationIndex = [NSNumber: LinePoint]()
-
     // Points already drawn into 'frozen' representation of this line.
     var committedPoints = [LinePoint]()
+
+    // Use the estimation index of the touch to track points awaiting updates.
+    var pointsWaitingForUpdatesByEstimationIndex = [NSNumber: LinePoint]()
 
     var isComplete: Bool {
         return pointsWaitingForUpdatesByEstimationIndex.isEmpty
@@ -18,8 +18,8 @@ class Line: NSObject {
 
     // MARK: Interface
 
-    func newPoint(ofType pointType: LinePoint.PointType, forTouch touch: UITouch) -> CGRect {
-        let point = addPoint(ofType: pointType, forTouch: touch)
+    func addPoint(ofType pointType: LinePoint.PointType, forTouch touch: UITouch) -> CGRect {
+        let point = newPoint(ofType: pointType, forTouch: touch)
 
         return points
             .get(atIndex: points.count - 2)
@@ -27,7 +27,7 @@ class Line: NSObject {
             point.drawRect
     }
 
-    func addPoint(ofType pointType: LinePoint.PointType, forTouch touch: UITouch) -> LinePoint {
+    func newPoint(ofType pointType: LinePoint.PointType, forTouch touch: UITouch) -> LinePoint {
         let point = LinePoint(touch: touch, sequenceNumber: points.count, pointType: pointType)
 
         points.append(point)
@@ -94,21 +94,20 @@ class Line: NSObject {
             for (index, point) in allPoints.enumerated() {
                 // Only points whose type does not include `.NeedsUpdate` or `.Predicted` and are not last or prior to last point can be committed.
                 guard point.pointType.intersection([.NeedsUpdate, .Predicted]).isEmpty && index < allPoints.count - 2 else {
-                    committing.append(points.first!)
+                    points.first.flatMap { committing.append($0) }
                     break
                 }
 
-                guard index > 0 else { continue }
-
-                let removed = points.remove(at: index)
-                committing.append(removed)
+                if let point = try? points.remove(safeAtIndex: index) {
+                    committing.append(point)
+                }
             }
         }
 
         // If only one point could be committed, no further action is required. Otherwise, draw the `committedLine`.
         guard committing.count > 1 else { return }
 
-        context.draw(points: points)
+        context.draw(points: committing)
 
         if !committedPoints.isEmpty {
             // Remove what was the last point committed point; it is also the first point being committed now.
@@ -120,7 +119,39 @@ class Line: NSObject {
     }
 
     func drawCommitedPointsInContext(context: CGContext) {
-        context.draw(points: committedPoints)
+        draw(points: committedPoints, inContext: context)
+    }
+
+    func draw(points: [LinePoint], inContext context: CGContext) {
+        context.draw(points: points)
+    }
+
+    func addPointsOfType(type: LinePoint.PointType, forTouches touches: [UITouch], currentUpdateRect updateRect: CGRect) -> CGRect {
+        var updateRect = updateRect
+        var type = type
+
+        for (index, touch) in touches.enumerated() {
+            // The visualization displays non-`.Stylus` touches differently.
+            if touch.type != .stylus {
+                type.formUnion(.Finger)
+            }
+
+            // Touches with estimated properties require updates; add this information to the `PointType`.
+            if !touch.estimatedProperties.isEmpty {
+                type.formUnion(.NeedsUpdate)
+            }
+
+            // The last touch in a set of `.Coalesced` touches is the originating touch. Track it differently.
+            if type.contains(.Coalesced) && index == touches.count - 1 {
+                type.subtract(.Coalesced)
+                type.formUnion(.Standard)
+            }
+
+            updateRect = addPoint(ofType: type, forTouch: touch)
+                .union(updateRect)
+        }
+
+        return updateRect
     }
 }
 

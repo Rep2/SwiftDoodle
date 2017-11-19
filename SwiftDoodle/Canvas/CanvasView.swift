@@ -32,6 +32,9 @@ public class CanvasView: UIView {
      */
     let pendingLines: NSMapTable<UITouch, Line> = NSMapTable.strongToStrongObjects()
 
+    /// An optional `CGImage` containing the last representation of lines no longer receiving updates.
+    var frozenImage: CGImage?
+
     /// A `CGContext` for drawing the last representation of lines no longer receiving updates into.
     lazy var frozenContext: CGContext = {
         let scale = self.window!.screen.scale
@@ -52,21 +55,16 @@ public class CanvasView: UIView {
 
         context.setLineCap(.round)
 
-        let transform = CGAffineTransform(scaleX: scale, y: scale)
+       let transform = CGAffineTransform(scaleX: scale, y: scale)
         context.concatenate(transform)
 
         return context
     }()
 
-    /// An optional `CGImage` containing the last representation of lines no longer receiving updates.
-    var frozenImage: CGImage?
-
     // MARK: Drawing
 
     override public func draw(_ rect: CGRect) {
         if let context = UIGraphicsGetCurrentContext() {
-            context.setLineCap(.round)
-
             if needsFullRedraw {
                 setFrozenImageNeedsUpdate()
                 frozenContext.clear(bounds)
@@ -86,9 +84,7 @@ public class CanvasView: UIView {
                 context.draw(frozenImage, in: bounds)
             }
 
-            for line in lines {
-                context.draw(points: line.points)
-            }
+            lines.forEach { context.draw(points: $0.points) }
         }
     }
 
@@ -112,24 +108,23 @@ public class CanvasView: UIView {
     func drawTouches(touches: Set<UITouch>, withEvent event: UIEvent?) {
         var updateRect = CGRect.null
 
-        for touch in touches {
+        touches.forEach { touch in
             // Retrieve a line from `activeLines`. If no line exists, create one.
-            let line: Line = activeLines.object(forKey: touch) ?? addActiveLineForTouch(touch: touch)
+            let line = activeLines.object(forKey: touch) ?? createLine(forTouch: touch)
 
             /*
              Remove prior predicted points and update the `updateRect` based on the removals. The touches
              used to create these points are predictions provided to offer additional data. They are stale
              by the time of the next event for this touch.
              */
-            updateRect = updateRect.union(line.removePoints(ofType: .Predicted))
+            updateRect = line.removePoints(ofType: .Predicted).union(updateRect)
 
             /*
              Incorporate coalesced touch data. The data in the last touch in the returned array will match
              the data of the touch supplied to `coalescedTouchesForTouch(_:)`
              */
             let coalescedTouches = event?.coalescedTouches(for: touch) ?? []
-            let coalescedRect = addPointsOfType(type: .Coalesced, forTouches: coalescedTouches, toLine: line, currentUpdateRect: updateRect)
-            updateRect = updateRect.union(coalescedRect)
+            updateRect = addPointsOfType(type: .Coalesced, forTouches: coalescedTouches, toLine: line, currentUpdateRect: updateRect)
 
             /*
              Incorporate predicted touch data. This sample draws predicted touches differently; however,
@@ -139,54 +134,28 @@ public class CanvasView: UIView {
              */
             if isPredictionEnabled {
                 let predictedTouches = event?.predictedTouches(for: touch) ?? []
-                let predictedRect = addPointsOfType(type: .Predicted, forTouches: predictedTouches, toLine: line, currentUpdateRect: updateRect)
-                updateRect = updateRect.union(predictedRect)
+                updateRect = addPointsOfType(type: .Predicted, forTouches: predictedTouches, toLine: line, currentUpdateRect: updateRect)
             }
         }
 
         setNeedsDisplay(updateRect)
     }
 
-    func addActiveLineForTouch(touch: UITouch) -> Line {
+    func createLine(forTouch touch: UITouch) -> Line {
         let newLine = Line()
 
         activeLines.setObject(newLine, forKey: touch)
-
         lines.append(newLine)
 
         return newLine
     }
 
     func addPointsOfType(type: LinePoint.PointType, forTouches touches: [UITouch], toLine line: Line, currentUpdateRect updateRect: CGRect) -> CGRect {
-        var accumulatedRect = CGRect.null
-        var type = type
+        let updateRect = line.addPointsOfType(type: type, forTouches: touches, currentUpdateRect: updateRect)
 
-        for (idx, touch) in touches.enumerated() {
-            let isStylus = touch.type == .stylus
+        commitLine(line: line)
 
-            // The visualization displays non-`.Stylus` touches differently.
-            if !isStylus {
-                type.formUnion(.Finger)
-            }
-
-            // Touches with estimated properties require updates; add this information to the `PointType`.
-            if !touch.estimatedProperties.isEmpty {
-                type.formUnion(.NeedsUpdate)
-            }
-
-            // The last touch in a set of `.Coalesced` touches is the originating touch. Track it differently.
-            if type.contains(.Coalesced) && idx == touches.count - 1 {
-                type.subtract(.Coalesced)
-                type.formUnion(.Standard)
-            }
-
-            let touchRect = line.newPoint(ofType: type, forTouch: touch)
-            accumulatedRect = accumulatedRect.union(touchRect)
-
-            commitLine(line: line)
-        }
-
-        return updateRect.union(accumulatedRect)
+        return updateRect
     }
 
     func endTouches(touches: Set<UITouch>, cancel: Bool) {
@@ -197,14 +166,14 @@ public class CanvasView: UIView {
             guard let line = activeLines.object(forKey: touch) else { continue }
 
             // If this is a touch cancellation, cancel the associated line.
-            if cancel { updateRect = updateRect.union(line.cancel()) }
+            if cancel {
+                updateRect = updateRect.union(line.cancel())
+            }
 
             // If the line is complete (no points needing updates) or updating isn't enabled, move the line to the `frozenImage`.
             if line.isComplete {
                 finishLine(line: line)
-            }
-                // Otherwise, add the line to our map of touches to lines pending update.
-            else {
+            } else {
                 pendingLines.setObject(line, forKey: touch)
             }
 
@@ -216,7 +185,6 @@ public class CanvasView: UIView {
     }
 
     func commitLine(line: Line) {
-        // Have the line draw any segments between points no longer being updated into the `frozenContext` and remove them from the line.
         line.drawFixedPointsInContext(context: frozenContext)
         setFrozenImageNeedsUpdate()
     }
@@ -231,5 +199,42 @@ public class CanvasView: UIView {
 
         // Store into finished lines to allow for a full redraw on option changes.
         finishedLines.append(line)
+    }
+}
+
+// MARK: Estimated properties
+
+extension CanvasView {
+    func updateEstimatedPropertiesForTouches(touches: Set<UITouch>) {
+        for touch in touches {
+            var isPending = false
+
+            // Look to retrieve a line from `activeLines`. If no line exists, look it up in `pendingLines`.
+            let possibleLine: Line? = activeLines.object(forKey: touch) ?? {
+                let pendingLine = pendingLines.object(forKey: touch)
+                isPending = pendingLine != nil
+                return pendingLine
+                }()
+
+            // If no line is related to the touch, return as there is no additional work to do.
+            guard let line = possibleLine else { return }
+
+            switch line.updateWithTouch(touch: touch) {
+            case (true, let updateRect):
+                setNeedsDisplay(updateRect)
+            default:
+                ()
+            }
+
+            // If this update updated the last point requiring an update, move the line to the `frozenImage`.
+            if isPending && line.isComplete {
+                finishLine(line: line)
+                pendingLines.removeObject(forKey: touch)
+            }
+                // Otherwise, have the line add any points no longer requiring updates to the `frozenImage`.
+            else {
+                commitLine(line: line)
+            }
+        }
     }
 }

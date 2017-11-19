@@ -2,22 +2,20 @@ import UIKit
 
 extension CGContext {
     func draw(points: [LinePoint]) {
-        _ = points
-            .reduce(nil) { (priorPoint, point) -> LinePoint? in
-                guard let priorPoint = priorPoint else { return point }
+        var points = points
 
-                setStrokeColor(point.drawColor.cgColor)
+        if let firstPoint = try? points.remove(safeAtIndex: 0) {
+            setStrokeColor(firstPoint.drawColor.cgColor)
+            setLineWidth(1)
 
-                beginPath()
+            beginPath()
 
-                move(to: CGPoint(x: point.location.x, y: point.location.y))
-                addLine(to: CGPoint(x: priorPoint.location.x, y: priorPoint.location.y))
+            move(to: CGPoint(x: firstPoint.location.x, y: firstPoint.location.y))
 
-                setLineWidth(point.drawWidth)
+            points
+                .forEach { addLine(to: CGPoint(x: $0.location.x, y: $0.location.y)) }
 
-                strokePath()
-
-                return point
-            }
+            strokePath()
+        }
     }
 }

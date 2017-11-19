@@ -11,12 +11,12 @@ extension Array {
      Removes element at index.
      Action that would cause an error are ignored.
      */
-    mutating func remove(safeAtIndex index: Index) throws {
+    mutating func remove(safeAtIndex index: Index) throws -> Element {
         guard index >= 0 && index < count else {
             throw ArrayError.indexOutOfBounds
         }
 
-        remove(at: index)
+        return remove(at: index)
     }
 
     /**

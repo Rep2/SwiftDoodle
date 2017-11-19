@@ -1,6 +1,6 @@
 import UIKit
 
-public class DrawView: CanvasView {
+extension CanvasView {
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         drawTouches(touches: touches, withEvent: event)
     }
@@ -19,6 +19,6 @@ public class DrawView: CanvasView {
     }
 
     override public func touchesEstimatedPropertiesUpdated(_ touches: Set<UITouch>) {
-//        updateEstimatedPropertiesForTouches(touches: touches)
+        updateEstimatedPropertiesForTouches(touches: touches)
     }
 }
