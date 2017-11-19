@@ -6,7 +6,7 @@ extension CGContext {
 
         if let firstPoint = try? points.remove(safeAtIndex: 0) {
             setStrokeColor(firstPoint.drawColor.cgColor)
-            setLineWidth(1)
+            setLineWidth(firstPoint.drawWidth)
 
             beginPath()
 
@@ -17,5 +17,24 @@ extension CGContext {
 
             strokePath()
         }
+    }
+
+    static func context(withSize size: CGSize, scale: CGFloat) -> CGContext {
+        let context = CGContext(
+            data: nil,
+            width: Int(size.width * scale),
+            height: Int(size.height * scale),
+            bitsPerComponent: 8,
+            bytesPerRow: 0,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+            )!
+
+        context.setLineCap(.round)
+
+        let transform = CGAffineTransform(scaleX: scale, y: scale)
+        context.concatenate(transform)
+
+        return context
     }
 }

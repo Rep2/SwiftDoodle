@@ -1,9 +1,8 @@
 import UIKit
 
 public class CanvasView: UIView {
-    // MARK: Properties
 
-    let isPredictionEnabled = UIDevice.current.userInterfaceIdiom == .pad
+    // MARK: Properties
 
     var needsFullRedraw = true
 
@@ -37,28 +36,7 @@ public class CanvasView: UIView {
 
     /// A `CGContext` for drawing the last representation of lines no longer receiving updates into.
     lazy var frozenContext: CGContext = {
-        let scale = self.window!.screen.scale
-        var size = self.bounds.size
-
-        size.width *= scale
-        size.height *= scale
-
-        let context = CGContext(
-            data: nil,
-            width: Int(size.width),
-            height: Int(size.height),
-            bitsPerComponent: 8,
-            bytesPerRow: 0,
-            space: CGColorSpaceCreateDeviceRGB(),
-            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
-        )!
-
-        context.setLineCap(.round)
-
-       let transform = CGAffineTransform(scaleX: scale, y: scale)
-        context.concatenate(transform)
-
-        return context
+        return CGContext.context(withSize: self.bounds.size, scale: self.window!.screen.scale)
     }()
 
     // MARK: Drawing
@@ -94,13 +72,18 @@ public class CanvasView: UIView {
 
     // MARK: Actions
 
-    func clear() {
+    public func clear() {
         activeLines.removeAllObjects()
         pendingLines.removeAllObjects()
         lines.removeAll()
         finishedLines.removeAll()
         needsFullRedraw = true
         setNeedsDisplay()
+    }
+
+    public func viewWillTransition(to size: CGSize) {
+        frozenContext = CGContext.context(withSize: size, scale: window!.screen.scale)
+        needsFullRedraw = true
     }
 
     // MARK: Convenience
@@ -113,29 +96,13 @@ public class CanvasView: UIView {
             let line = activeLines.object(forKey: touch) ?? createLine(forTouch: touch)
 
             /*
-             Remove prior predicted points and update the `updateRect` based on the removals. The touches
-             used to create these points are predictions provided to offer additional data. They are stale
-             by the time of the next event for this touch.
-             */
-            updateRect = line.removePoints(ofType: .Predicted).union(updateRect)
-
-            /*
              Incorporate coalesced touch data. The data in the last touch in the returned array will match
              the data of the touch supplied to `coalescedTouchesForTouch(_:)`
              */
             let coalescedTouches = event?.coalescedTouches(for: touch) ?? []
-            updateRect = addPointsOfType(type: .Coalesced, forTouches: coalescedTouches, toLine: line, currentUpdateRect: updateRect)
+            updateRect = line.addPointsOfType(type: .Coalesced, forTouches: coalescedTouches, currentUpdateRect: updateRect)
 
-            /*
-             Incorporate predicted touch data. This sample draws predicted touches differently; however,
-             you may want to use them as inputs to smoothing algorithms rather than directly drawing them.
-             Points derived from predicted touches should be removed from the line at the next event for
-             this touch.
-             */
-            if isPredictionEnabled {
-                let predictedTouches = event?.predictedTouches(for: touch) ?? []
-                updateRect = addPointsOfType(type: .Predicted, forTouches: predictedTouches, toLine: line, currentUpdateRect: updateRect)
-            }
+            commitLine(line: line)
         }
 
         setNeedsDisplay(updateRect)
@@ -148,14 +115,6 @@ public class CanvasView: UIView {
         lines.append(newLine)
 
         return newLine
-    }
-
-    func addPointsOfType(type: LinePoint.PointType, forTouches touches: [UITouch], toLine line: Line, currentUpdateRect updateRect: CGRect) -> CGRect {
-        let updateRect = line.addPointsOfType(type: type, forTouches: touches, currentUpdateRect: updateRect)
-
-        commitLine(line: line)
-
-        return updateRect
     }
 
     func endTouches(touches: Set<UITouch>, cancel: Bool) {
@@ -184,15 +143,13 @@ public class CanvasView: UIView {
         setNeedsDisplay(updateRect)
     }
 
-    func commitLine(line: Line) {
-        line.drawFixedPointsInContext(context: frozenContext)
+    func commitLine(line: Line, commitAll: Bool = false) {
+
         setFrozenImageNeedsUpdate()
-    }
+        line.drawFixedPointsInContext(context: frozenContext, commitAll: commitAll)    }
 
     func finishLine(line: Line) {
-        // Have the line draw any remaining segments into the `frozenContext`. All should be fixed now.
-        line.drawFixedPointsInContext(context: frozenContext, commitAll: true)
-        setFrozenImageNeedsUpdate()
+        commitLine(line: line, commitAll: true)
 
         // Cease tracking this line now that it is finished.
         lines.remove(at: lines.index(of: line)!)

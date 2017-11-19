@@ -28,7 +28,7 @@ class LinePoint: NSObject {
 
     var pointType: PointType
 
-    var drawWidth: CGFloat = 1
+    var drawWidth: CGFloat = 10
 
     // MARK: Initialization
 

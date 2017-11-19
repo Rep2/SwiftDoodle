@@ -47,14 +47,8 @@ class Line: NSObject {
         points = points.filter { point in
             let keepPoint = !point.pointType.contains(type)
 
-            if !keepPoint {
-                var rect = point.drawRect
-
-                if let priorPoint = priorPoint {
-                    rect = rect.union(priorPoint.drawRect)
-                }
-
-                updateRect = updateRect.union(rect)
+            if !keepPoint, let priorPoint = priorPoint {
+                updateRect = priorPoint.drawRect.union(updateRect)
             }
 
             priorPoint = point
