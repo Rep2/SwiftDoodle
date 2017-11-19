@@ -121,7 +121,7 @@ public class CanvasView: UIView {
              used to create these points are predictions provided to offer additional data. They are stale
              by the time of the next event for this touch.
              */
-            updateRect = updateRect.union(line.removePointsWithType(type: .Predicted))
+            updateRect = updateRect.union(line.removePoints(ofType: .Predicted))
 
             /*
              Incorporate coalesced touch data. The data in the last touch in the returned array will match
@@ -180,7 +180,7 @@ public class CanvasView: UIView {
                 type.formUnion(.Standard)
             }
 
-            let touchRect = line.addPointOfType(pointType: type, forTouch: touch)
+            let touchRect = line.newPoint(ofType: type, forTouch: touch)
             accumulatedRect = accumulatedRect.union(touchRect)
 
             commitLine(line: line)

@@ -18,20 +18,29 @@ class Line: NSObject {
 
     // MARK: Interface
 
-    func addPointOfType(pointType: LinePoint.PointType, forTouch touch: UITouch) -> CGRect {
+    func newPoint(ofType pointType: LinePoint.PointType, forTouch touch: UITouch) -> CGRect {
+        let point = addPoint(ofType: pointType, forTouch: touch)
+
+        return points
+            .get(atIndex: points.count - 2)
+            .flatMap { point.drawRect(withPreviousPoint: $0) } ??
+            point.drawRect
+    }
+
+    func addPoint(ofType pointType: LinePoint.PointType, forTouch touch: UITouch) -> LinePoint {
         let point = LinePoint(touch: touch, sequenceNumber: points.count, pointType: pointType)
 
         points.append(point)
 
+        // If the point is estimated, add it to points waiting for update
         if let estimationIndex = point.estimationUpdateIndex, !point.estimatedPropertiesExpectingUpdates.isEmpty {
             pointsWaitingForUpdatesByEstimationIndex[estimationIndex] = point
         }
 
-        return points[safeIndex: points.count - 2].flatMap { point.drawRect(withPreviousPoint: $0) } ??
-            point.drawRect
+        return point
     }
 
-    func removePointsWithType(type: LinePoint.PointType) -> CGRect {
+    func removePoints(ofType type: LinePoint.PointType) -> CGRect {
         var updateRect = CGRect.null
         var priorPoint: LinePoint?
 
@@ -91,16 +100,14 @@ class Line: NSObject {
 
                 guard index > 0 else { continue }
 
-                // First time to this point should be index 1 if there is a line segment that can be committed.
-                let removed = points.removeFirst()
+                let removed = points.remove(at: index)
                 committing.append(removed)
             }
         }
+
         // If only one point could be committed, no further action is required. Otherwise, draw the `committedLine`.
         guard committing.count > 1 else { return }
 
-        let committedLine = Line()
-        committedLine.points = committing
         context.draw(points: points)
 
         if !committedPoints.isEmpty {
@@ -113,9 +120,7 @@ class Line: NSObject {
     }
 
     func drawCommitedPointsInContext(context: CGContext) {
-        let committedLine = Line()
-        committedLine.points = committedPoints
-        context.draw(points: points)
+        context.draw(points: committedPoints)
     }
 }
 

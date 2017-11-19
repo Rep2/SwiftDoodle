@@ -3,15 +3,17 @@
  All action that would cause an error are ignored.
  */
 extension Array {
+    enum ArrayError: Error {
+        case indexOutOfBounds
+    }
 
     /**
      Removes element at index.
      Action that would cause an error are ignored.
      */
-    mutating func remove(safeAtIndex index: Index) {
+    mutating func remove(safeAtIndex index: Index) throws {
         guard index >= 0 && index < count else {
-            print("Index out of bounds while deleting item at index \(index) in \(self). This action is ignored.")
-            return
+            throw ArrayError.indexOutOfBounds
         }
 
         remove(at: index)
@@ -21,10 +23,9 @@ extension Array {
      Inserts element at index.
      Action that would cause an error are ignored.
      */
-    mutating func insert(_ element: Element, safeAtIndex index: Index) {
+    mutating func insert(_ element: Element, safeAtIndex index: Index) throws {
         guard index >= 0 && index <= count else {
-            print("Index out of bounds while inserting item at index \(index) in \(self). This action is ignored")
-            return
+            throw ArrayError.indexOutOfBounds
         }
 
         insert(element, at: index)
@@ -34,17 +35,11 @@ extension Array {
      Safe get set subscript.
      Action that would cause an error are ignored.
      */
-    subscript (safeIndex index: Index) -> Element? {
-        get {
-            return indices.contains(index) ? self[index] : nil
+    func get(atIndex index: Index) -> Element? {
+        guard index >= 0 && index < count else {
+            return nil
         }
-        set {
-            remove(safeAtIndex: index)
 
-            if let element = newValue {
-                insert(element, safeAtIndex: index)
-            }
-        }
+        return self[index]
     }
 }
-
