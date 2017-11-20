@@ -64,12 +64,6 @@ extension LinePoint {
     }
 
     var drawColor: UIColor {
-        if pointType.contains(.Cancelled) {
-            return .clear
-        } else if pointType.contains(.Predicted) {
-            return UIColor.black.withAlphaComponent(0.5)
-        } else {
-            return .black
-        }
+        return .black
     }
 }

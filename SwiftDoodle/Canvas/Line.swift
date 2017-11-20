@@ -70,11 +70,6 @@ class Line: NSObject {
                 type.formUnion(.Finger)
             }
 
-            // Touches with estimated properties require updates; add this information to the `PointType`.
-            if !touch.estimatedProperties.isEmpty {
-                type.formUnion(.NeedsUpdate)
-            }
-
             // The last touch in a set of `.Coalesced` touches is the originating touch. Track it differently.
             if type.contains(.Coalesced) && index == touches.count - 1 {
                 type.subtract(.Coalesced)
