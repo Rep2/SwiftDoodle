@@ -19,8 +19,6 @@ class LinePoint: NSObject {
     var sequenceNumber: Int
     let timestamp: TimeInterval
     var location: CGPoint
-    var estimatedPropertiesExpectingUpdates: UITouchProperties
-    var estimatedProperties: UITouchProperties
     let type: UITouchType
     var altitudeAngle: CGFloat
     var azimuthAngle: CGFloat
@@ -40,60 +38,10 @@ class LinePoint: NSObject {
         let view = touch.view
         location = touch.preciseLocation(in: view)
         azimuthAngle = touch.azimuthAngle(in: view)
-        estimatedProperties = touch.estimatedProperties
-        estimatedPropertiesExpectingUpdates = touch.estimatedPropertiesExpectingUpdates
         altitudeAngle = touch.altitudeAngle
         timestamp = touch.timestamp
 
-        if !estimatedPropertiesExpectingUpdates.isEmpty {
-            self.pointType.formUnion(.NeedsUpdate)
-        }
-
         estimationUpdateIndex = touch.estimationUpdateIndex
-    }
-}
-
-// MARK: Estimated properties
-
-extension LinePoint {
-    func updateWithTouch(touch: UITouch) -> Bool {
-        guard let estimationUpdateIndex = touch.estimationUpdateIndex, estimationUpdateIndex == estimationUpdateIndex else { return false }
-
-        // Iterate through possible properties.
-        for expectedProperty in PointType.touchUpdateProperties where estimatedPropertiesExpectingUpdates.contains(expectedProperty) {
-            update(touchProperty: expectedProperty, touch: touch)
-
-            if !touch.estimatedProperties.contains(expectedProperty) {
-                // Flag that this point now has a 'final' value for this property.
-                estimatedProperties.subtract(expectedProperty)
-            }
-
-            if !touch.estimatedPropertiesExpectingUpdates.contains(expectedProperty) {
-                // Flag that this point is no longer expecting updates for this property.
-                estimatedPropertiesExpectingUpdates.subtract(expectedProperty)
-
-                if estimatedPropertiesExpectingUpdates.isEmpty {
-                    // Flag that this point has been updated and no longer needs updates.
-                    pointType.subtract(.NeedsUpdate)
-                    pointType.formUnion(.Updated)
-                }
-            }
-        }
-
-        return true
-    }
-
-    func update(touchProperty: UITouchProperties, touch: UITouch) {
-        switch touchProperty {
-        case .azimuth:
-            azimuthAngle = touch.azimuthAngle(in: touch.view)
-        case .altitude:
-            altitudeAngle = touch.altitudeAngle
-        case .location:
-            location = touch.preciseLocation(in: touch.view)
-        default:
-            break
-        }
     }
 }
 
