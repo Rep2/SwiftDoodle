@@ -10,10 +10,19 @@ class ViewController: UIViewController {
         return view
     }()
 
+    lazy var paletteView: PaletteView = {
+        let view = PaletteView(containerSize: self.view.bounds.size, location: .right)
+
+        view.backgroundColor = .black
+
+        return view
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view = canvasView
+//        view.addSubview(paletteView)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
