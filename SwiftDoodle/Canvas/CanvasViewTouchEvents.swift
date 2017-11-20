@@ -11,14 +11,10 @@ extension CanvasView {
 
     override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         drawTouches(touches: touches, withEvent: event)
-        endTouches(touches: touches, cancel: false)
+        endTouches(touches: touches)
     }
 
     override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        endTouches(touches: touches, cancel: true)
-    }
-
-    override public func touchesEstimatedPropertiesUpdated(_ touches: Set<UITouch>) {
-        updateEstimatedPropertiesForTouches(touches: touches)
+        endTouches(touches: touches)
     }
 }

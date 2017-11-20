@@ -37,4 +37,9 @@ extension CGContext {
 
         return context
     }
+
+    func drawImage(in bounds: CGRect) {
+        makeImage()
+            .flatMap { draw($0, in: bounds) }
+    }
 }

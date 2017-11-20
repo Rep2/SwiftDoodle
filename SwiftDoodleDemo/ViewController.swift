@@ -19,6 +19,6 @@ class ViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
-        canvasView.viewWillTransition(to: size)
+        canvasView.updateContextSize(to: size)
     }
 }
