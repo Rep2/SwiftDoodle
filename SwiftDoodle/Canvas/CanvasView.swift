@@ -11,9 +11,17 @@ public class CanvasView: UIView {
     let activeLines: NSMapTable<UITouch, Line> = NSMapTable.strongToStrongObjects()
 
     /// A `CGContext` for drawing the last representation of lines no longer receiving updates into.
-    lazy var frozenContext: CGContext = {
-        return CGContext.context(withSize: self.bounds.size, scale: self.window!.screen.scale)
-    }()
+    var frozenContext: CGContext
+
+    public init(frame: CGRect, scale: CGFloat) {
+        frozenContext = CGContext.context(withSize: frame.size, scale: scale)
+
+        super.init(frame: frame)
+    }
+
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: Drawing
 
@@ -67,8 +75,8 @@ public class CanvasView: UIView {
     }
 
     /// Updates the views size. Must be called on screen rotation.
-    public func updateContextSize(to size: CGSize) {
-        frozenContext = CGContext.context(withSize: size, scale: window!.screen.scale)
+    public func screenSizeDidChange(size: CGSize, scale: CGFloat) {
+        frozenContext = CGContext.context(withSize: size, scale: scale)
         needsFullRedraw = true
     }
 
