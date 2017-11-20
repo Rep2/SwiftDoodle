@@ -16,13 +16,11 @@ class LinePoint: NSObject {
 
     // MARK: Properties
 
-    var sequenceNumber: Int
     let timestamp: TimeInterval
     var location: CGPoint
     let type: UITouchType
     var altitudeAngle: CGFloat
     var azimuthAngle: CGFloat
-    let estimationUpdateIndex: NSNumber?
 
     var pointType: PointType
 
@@ -30,8 +28,7 @@ class LinePoint: NSObject {
 
     // MARK: Initialization
 
-    init(touch: UITouch, sequenceNumber: Int, pointType: PointType) {
-        self.sequenceNumber = sequenceNumber
+    init(touch: UITouch, pointType: PointType) {
         self.type = touch.type
         self.pointType = pointType
 
@@ -40,8 +37,6 @@ class LinePoint: NSObject {
         azimuthAngle = touch.azimuthAngle(in: view)
         altitudeAngle = touch.altitudeAngle
         timestamp = touch.timestamp
-
-        estimationUpdateIndex = touch.estimationUpdateIndex
     }
 }
 

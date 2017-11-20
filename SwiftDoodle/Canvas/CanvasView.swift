@@ -6,16 +6,8 @@ public class CanvasView: UIView {
 
     var needsFullRedraw = true
 
-    /// Array containing all line objects that have been completely drawn into the frozenContext.
     var finishedLines = [Line]()
 
-    /**
-     Holds a map of `UITouch` objects to `Line` objects whose touch has not ended yet.
-
-     Use `NSMapTable` to handle association as `UITouch` doesn't conform to `NSCopying`. There is no value
-     in accessing the properties of the touch used as a key in the map table. `UITouch` properties should
-     be accessed in `NSResponder` callbacks and methods called from them.
-     */
     let activeLines: NSMapTable<UITouch, Line> = NSMapTable.strongToStrongObjects()
 
     /// A `CGContext` for drawing the last representation of lines no longer receiving updates into.
@@ -33,33 +25,16 @@ public class CanvasView: UIView {
                 frozenContext.clear(bounds)
 
                 finishedLines
-                    .forEach { $0.drawCommitedPointsInContext(context: frozenContext) }
+                    .forEach { frozenContext.draw(points: $0.committedPoints) }
 
                 needsFullRedraw = false
             }
 
-            frozenContext.drawImage(in: bounds)
-
+            frozenContext
+                .makeImage()
+                .flatMap { context.draw($0, in: bounds) }
         }
     }
-
-    // MARK: Actions
-
-    /// Removes all drawing data
-    public func clear() {
-        activeLines.removeAllObjects()
-        finishedLines.removeAll()
-        needsFullRedraw = true
-        setNeedsDisplay()
-    }
-
-    /// Updates the views size. Must be called on screen rotation.
-    public func updateContextSize(to size: CGSize) {
-        frozenContext = CGContext.context(withSize: size, scale: window!.screen.scale)
-        needsFullRedraw = true
-    }
-
-    // MARK: Convenience
 
     func drawTouches(touches: Set<UITouch>, withEvent event: UIEvent?) {
         var updateRect = CGRect.null
@@ -81,7 +56,25 @@ public class CanvasView: UIView {
             }
     }
 
-    func updateLine(associatedWith touch: UITouch, event: UIEvent?) -> CGRect {
+    // MARK: Actions
+
+    /// Removes all drawing data
+    public func clear() {
+        activeLines.removeAllObjects()
+        finishedLines.removeAll()
+        needsFullRedraw = true
+        setNeedsDisplay()
+    }
+
+    /// Updates the views size. Must be called on screen rotation.
+    public func updateContextSize(to size: CGSize) {
+        frozenContext = CGContext.context(withSize: size, scale: window!.screen.scale)
+        needsFullRedraw = true
+    }
+
+    // MARK: Convenience
+
+    private func updateLine(associatedWith touch: UITouch, event: UIEvent?) -> CGRect {
         let lineAssociatedWithTouch = line(for: touch)
 
         let coalescedTouches = event?.coalescedTouches(for: touch) ?? []
@@ -93,12 +86,12 @@ public class CanvasView: UIView {
     }
 
     /// Retrieve a line from `activeLines`. If no line exists, create one.
-    func line(for touch: UITouch) -> Line {
+    private func line(for touch: UITouch) -> Line {
         return activeLines.object(forKey: touch) ?? createLine(forTouch: touch)
     }
 
     /// Create a line associated with touch
-    func createLine(forTouch touch: UITouch) -> Line {
+    private func createLine(forTouch touch: UITouch) -> Line {
         let newLine = Line()
 
         activeLines.setObject(newLine, forKey: touch)

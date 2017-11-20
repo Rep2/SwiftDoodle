@@ -5,8 +5,6 @@ extension CGContext {
         var points = points
 
         if let firstPoint = try? points.remove(safeAtIndex: 0) {
-            setStrokeColor(firstPoint.drawColor.cgColor)
-            setLineWidth(firstPoint.drawWidth)
 
             beginPath()
 
@@ -35,11 +33,9 @@ extension CGContext {
         let transform = CGAffineTransform(scaleX: scale, y: scale)
         context.concatenate(transform)
 
-        return context
-    }
+        context.setStrokeColor(UIColor.black.cgColor)
+        context.setLineWidth(10)
 
-    func drawImage(in bounds: CGRect) {
-        makeImage()
-            .flatMap { draw($0, in: bounds) }
+        return context
     }
 }
