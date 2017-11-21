@@ -15,7 +15,7 @@
 		F65402E21FC0E82700A9E39B /* SafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65402E11FC0E82700A9E39B /* SafeArray.swift */; };
 		F65F00C31FBF2C5C00B55058 /* SwiftDoodle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; };
 		F65F00C41FBF2C5C00B55058 /* SwiftDoodle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F65F00C91FBF5E0F00B55058 /* LinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F00C81FBF5E0F00B55058 /* LinePoint.swift */; };
+		F65F00C91FBF5E0F00B55058 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F00C81FBF5E0F00B55058 /* Point.swift */; };
 		F65F00CB1FBF647800B55058 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F00CA1FBF647800B55058 /* Line.swift */; };
 		F65F00CD1FBF650100B55058 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F00CC1FBF650100B55058 /* CanvasView.swift */; };
 		F65F00CF1FBF66ED00B55058 /* CanvasViewTouchEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F00CE1FBF66ED00B55058 /* CanvasViewTouchEvents.swift */; };
@@ -93,7 +93,7 @@
 		CF0E64F93CD86A9C02D1C82F /* Pods_SwiftDoodleDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftDoodleDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1FBD8D3373559AFC2625D02 /* Pods-SwiftDoodle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDoodle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDoodle/Pods-SwiftDoodle.debug.xcconfig"; sourceTree = "<group>"; };
 		F65402E11FC0E82700A9E39B /* SafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeArray.swift; sourceTree = "<group>"; };
-		F65F00C81FBF5E0F00B55058 /* LinePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePoint.swift; sourceTree = "<group>"; };
+		F65F00C81FBF5E0F00B55058 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		F65F00CA1FBF647800B55058 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		F65F00CC1FBF650100B55058 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		F65F00CE1FBF66ED00B55058 /* CanvasViewTouchEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewTouchEvents.swift; sourceTree = "<group>"; };
@@ -297,7 +297,7 @@
 		F66429561FBF2AC500317721 /* Canvas */ = {
 			isa = PBXGroup;
 			children = (
-				F65F00C81FBF5E0F00B55058 /* LinePoint.swift */,
+				F65F00C81FBF5E0F00B55058 /* Point.swift */,
 				F65F00CA1FBF647800B55058 /* Line.swift */,
 				F65F00CC1FBF650100B55058 /* CanvasView.swift */,
 				F65F00CE1FBF66ED00B55058 /* CanvasViewTouchEvents.swift */,
@@ -801,7 +801,7 @@
 			files = (
 				F65F00CB1FBF647800B55058 /* Line.swift in Sources */,
 				F6AE8CB41FC26CAF00EC1E6C /* PaletteView.swift in Sources */,
-				F65F00C91FBF5E0F00B55058 /* LinePoint.swift in Sources */,
+				F65F00C91FBF5E0F00B55058 /* Point.swift in Sources */,
 				F65F00CF1FBF66ED00B55058 /* CanvasViewTouchEvents.swift in Sources */,
 				F65402E21FC0E82700A9E39B /* SafeArray.swift in Sources */,
 				F65F00D21FBF6F6000B55058 /* CGContext.swift in Sources */,

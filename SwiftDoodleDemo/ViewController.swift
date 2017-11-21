@@ -29,7 +29,6 @@ class ViewController: UIViewController {
         title = "Demo"
 
         view.addSubview(canvasView)
-       
 
         canvasView.snp.makeConstraints { view in
             view.edges.equalTo(self.view)

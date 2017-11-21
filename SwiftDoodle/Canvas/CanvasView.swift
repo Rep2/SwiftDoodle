@@ -78,11 +78,13 @@ public class CanvasView: UIView {
         let lineAssociatedWithTouch = line(for: touch)
 
         let coalescedTouches = event?.coalescedTouches(for: touch) ?? []
-        let updateRect = lineAssociatedWithTouch.addPointsOfType(type: .Coalesced, forTouches: coalescedTouches)
+        lineAssociatedWithTouch.addPoints(for: coalescedTouches)
 
-        frozenContext.draw(points: lineAssociatedWithTouch.pointsToBeDrawn)
+        let pointsToBeDrawn = lineAssociatedWithTouch.pointsToBeDrawn
 
-        return updateRect
+        frozenContext.draw(points: pointsToBeDrawn)
+
+        return Point.updateRect(for: pointsToBeDrawn, magnitude: 10)
     }
 
     /// Retrieve a line from `activeLines`. If no line exists, create one.

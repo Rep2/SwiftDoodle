@@ -1,7 +1,7 @@
 import UIKit
 
 extension CGContext {
-    func draw(points: [LinePoint]) {
+    func draw(points: [Point]) {
         var points = points
 
         if let firstPoint = try? points.remove(safeAtIndex: 0) {
