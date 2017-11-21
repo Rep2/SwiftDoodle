@@ -17,7 +17,7 @@ extension CGContext {
         }
     }
 
-    static func context(withSize size: CGSize, scale: CGFloat) -> CGContext {
+    static func context(withSize size: CGSize, scale: CGFloat, palette: Palette) -> CGContext {
         let context = CGContext(
             data: nil,
             width: Int(size.width * scale),
@@ -33,8 +33,8 @@ extension CGContext {
         let transform = CGAffineTransform(scaleX: scale, y: scale)
         context.concatenate(transform)
 
-        context.setStrokeColor(UIColor.black.cgColor)
-        context.setLineWidth(10)
+        context.setStrokeColor(palette.color.cgColor)
+        context.setLineWidth(palette.width)
 
         return context
     }

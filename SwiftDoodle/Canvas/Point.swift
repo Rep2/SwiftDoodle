@@ -1,17 +1,18 @@
 struct Point {
+
     var location: CGPoint
 
     init(touch: UITouch) {
         location = touch.preciseLocation(in: touch.view)
     }
 
-    static func updateRect(for points: [Point], magnitude: CGFloat) -> CGRect {
+    static func updateRect(for points: [Point], lineWidth: CGFloat) -> CGRect {
         var updateRect = CGRect.zero
 
         _ = points.reduce(nil) { (previousPoint: Point?, currentPoint: Point) in
             if let previousPoint = previousPoint {
                 updateRect = currentPoint
-                    .updateRect(with: previousPoint, magnitude: magnitude)
+                    .updateRect(with: previousPoint, lineWidth: lineWidth)
                     .union(updateRect)
             }
 
@@ -25,9 +26,9 @@ struct Point {
         return CGRect(origin: location, size: .zero)
     }
 
-    private func updateRect(with previousPoint: Point, magnitude: CGFloat) -> CGRect {
+    private func updateRect(with previousPoint: Point, lineWidth: CGFloat) -> CGRect {
         return centerRect
             .union(previousPoint.centerRect)
-            .insetBy(dx: -magnitude, dy: -magnitude)
+            .insetBy(dx: -lineWidth, dy: -lineWidth)
     }
 }

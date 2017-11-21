@@ -3,8 +3,10 @@ import SwiftDoodle
 import SnapKit
 
 class ViewController: UIViewController {
+    let palette = Palette(color: .black, width: 5)
+
     lazy var canvasView: DrawView = {
-        let view = DrawView(scale: ApplicationManager.shared.scale)
+        let view = DrawView(scale: ApplicationManager.shared.scale, palette: palette)
 
         view.backgroundColor = .white
 

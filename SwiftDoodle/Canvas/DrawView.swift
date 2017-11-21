@@ -19,6 +19,9 @@ public class DrawView: UIView {
     /// Screen scale used to create context
     let scale: CGFloat
 
+    /// Palette used to customize drawing
+    var palette: Palette
+
     /*
      Resizes the drawing context on view resize.
 
@@ -30,7 +33,7 @@ public class DrawView: UIView {
             let oldImage = drawingContext?.makeImage()
 
             // Creates context with new view size
-            drawingContext = CGContext.context(withSize: bounds.size, scale: scale)
+            drawingContext = CGContext.context(withSize: bounds.size, scale: scale, palette: palette)
 
             // If old image exists, draw it on a new context
             if let oldImage = oldImage {
@@ -41,8 +44,9 @@ public class DrawView: UIView {
         }
     }
 
-    public init(scale: CGFloat, frame: CGRect = .zero) {
+    public init(scale: CGFloat, palette: Palette, frame: CGRect = .zero) {
         self.scale = scale
+        self.palette = palette
 
         super.init(frame: frame)
     }
@@ -75,7 +79,7 @@ public class DrawView: UIView {
             .reduce(CGRect.zero) { updateRect, points in
                 self.drawingContext.draw(points: points)
 
-                return Point.updateRect(for: points, magnitude: 10).union(updateRect)
+                return Point.updateRect(for: points, lineWidth: palette.width).union(updateRect)
             }
 
         setNeedsDisplay(updateRect)
