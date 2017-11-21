@@ -4,19 +4,33 @@ public class CanvasView: UIView {
 
     // MARK: Properties
 
-    var needsFullRedraw = true
-
-    var finishedLines = [Line]()
-
     let activeLines: NSMapTable<UITouch, Line> = NSMapTable.strongToStrongObjects()
 
     /// A `CGContext` for drawing the last representation of lines no longer receiving updates into.
-    var frozenContext: CGContext
+    var frozenContext: CGContext!
 
-    public init(frame: CGRect, scale: CGFloat) {
-        frozenContext = CGContext.context(withSize: frame.size, scale: scale)
+    let scale: CGFloat
 
-        super.init(frame: frame)
+    var originalBounds: CGRect!
+
+    override public var bounds: CGRect {
+        didSet {
+            if originalBounds == nil {
+                originalBounds = bounds
+                frozenContext = CGContext.context(withSize: bounds.size, scale: scale)
+            }
+
+            originalBounds.origin.x = max(0, (bounds.width - originalBounds.width) / 2)
+            originalBounds.origin.y = max(0, (bounds.height - originalBounds.height) / 2)
+
+            setNeedsDisplay()
+        }
+    }
+
+    public init(scale: CGFloat) {
+        self.scale = scale
+
+        super.init(frame: .zero)
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -29,18 +43,9 @@ public class CanvasView: UIView {
         if let context = UIGraphicsGetCurrentContext() {
             context.setLineCap(.round)
 
-            if needsFullRedraw {
-                frozenContext.clear(bounds)
-
-                finishedLines
-                    .forEach { frozenContext.draw(points: $0.committedPoints) }
-
-                needsFullRedraw = false
-            }
-
             frozenContext
                 .makeImage()
-                .flatMap { context.draw($0, in: bounds) }
+                .flatMap { context.draw($0, in: originalBounds) }
         }
     }
 
@@ -55,13 +60,7 @@ public class CanvasView: UIView {
     }
 
     func endTouches(touches: Set<UITouch>) {
-        touches
-            .forEach { touch in
-                if let line = activeLines.object(forKey: touch) {
-                    activeLines.removeObject(forKey: touch)
-                    finishedLines.append(line)
-                }
-            }
+        touches.forEach(activeLines.removeObject)
     }
 
     // MARK: Actions
@@ -69,15 +68,8 @@ public class CanvasView: UIView {
     /// Removes all drawing data
     public func clear() {
         activeLines.removeAllObjects()
-        finishedLines.removeAll()
-        needsFullRedraw = true
+        frozenContext.clear(bounds)
         setNeedsDisplay()
-    }
-
-    /// Updates the views size. Must be called on screen rotation.
-    public func screenSizeDidChange(size: CGSize, scale: CGFloat) {
-        frozenContext = CGContext.context(withSize: size, scale: scale)
-        needsFullRedraw = true
     }
 
     // MARK: Convenience

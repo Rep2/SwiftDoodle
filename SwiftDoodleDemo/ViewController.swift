@@ -1,9 +1,10 @@
 import UIKit
 import SwiftDoodle
+import SnapKit
 
 class ViewController: UIViewController {
     lazy var canvasView: CanvasView = {
-        let view = CanvasView(frame: CGRect(x: 0, y: 64, width: self.view.bounds.width, height: self.view.bounds.height - 64), scale: ApplicationManager.shared.scale)
+        let view = CanvasView(scale: ApplicationManager.shared.scale)
 
         view.backgroundColor = .white
 
@@ -21,15 +22,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view = canvasView
-        view.addSubview(paletteView)
-
-        title = "Demo"
+        setupView()
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
+    func setupView() {
+        title = "Demo"
 
-        canvasView.screenSizeDidChange(size: CGSize(width: size.width, height: size.height - 64), scale: ApplicationManager.shared.scale)
+        view.addSubview(canvasView)
+       
+
+        canvasView.snp.makeConstraints { view in
+            view.edges.equalTo(self.view)
+        }
     }
 }
