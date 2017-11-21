@@ -2,8 +2,9 @@ import UIKit
 
 class Line {
     var points = [Point]()
+    var drawnPoints = [Point]()
 
-    var pointsToBeDrawn: [Point] {
+    func calculatePointsToBeDrawn() -> [Point] {
         guard points.count > 1 else {
             return []
         }
@@ -12,6 +13,8 @@ class Line {
 
         points = [points.last!]
 
+        appendDrawnPoints(allPoints)
+
         return allPoints
     }
 
@@ -19,5 +22,13 @@ class Line {
         touches.forEach {
             points.append(Point(touch: $0))
         }
+    }
+
+    func appendDrawnPoints(_ points: [Point]) {
+        if !drawnPoints.isEmpty {
+            drawnPoints.removeLast()
+        }
+
+        drawnPoints.append(contentsOf: points)
     }
 }

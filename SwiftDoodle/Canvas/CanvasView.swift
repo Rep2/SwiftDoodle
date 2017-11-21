@@ -50,11 +50,18 @@ public class CanvasView: UIView {
     }
 
     func drawTouches(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        var updateRect = CGRect.null
+        var linesToBeDrawn = [[Point]]()
 
         touches.forEach { touch in
-            updateRect = self.updateLine(associatedWith: touch, event: event).union(updateRect)
+            linesToBeDrawn.append(self.pointsToBeDrawn(associatedWith: touch, event: event))
         }
+
+        let updateRect = linesToBeDrawn
+            .reduce(CGRect.zero) { updateRect, points in
+                self.frozenContext.draw(points: points)
+
+                return Point.updateRect(for: points, magnitude: 10).union(updateRect)
+            }
 
         setNeedsDisplay(updateRect)
     }
@@ -74,17 +81,13 @@ public class CanvasView: UIView {
 
     // MARK: Convenience
 
-    private func updateLine(associatedWith touch: UITouch, event: UIEvent?) -> CGRect {
+    private func pointsToBeDrawn(associatedWith touch: UITouch, event: UIEvent?) -> [Point] {
         let lineAssociatedWithTouch = line(for: touch)
 
         let coalescedTouches = event?.coalescedTouches(for: touch) ?? []
         lineAssociatedWithTouch.addPoints(for: coalescedTouches)
 
-        let pointsToBeDrawn = lineAssociatedWithTouch.pointsToBeDrawn
-
-        frozenContext.draw(points: pointsToBeDrawn)
-
-        return Point.updateRect(for: pointsToBeDrawn, magnitude: 10)
+        return lineAssociatedWithTouch.calculatePointsToBeDrawn()
     }
 
     /// Retrieve a line from `activeLines`. If no line exists, create one.
