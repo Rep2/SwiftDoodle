@@ -1,4 +1,4 @@
-public class PaletteModel {
+public class PaletteViewModel {
     public enum Tool {
         case pencil
         case eraser

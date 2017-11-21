@@ -3,7 +3,7 @@ import SwiftDoodle
 import SnapKit
 
 class ViewController: UIViewController {
-    let palette = PaletteModel(color: .black, width: 5, tool: .pencil)
+    let palette = PaletteViewModel(color: .black, width: 5, tool: .pencil)
 
     lazy var canvasView: DrawView = {
         let view = DrawView(scale: ApplicationManager.shared.scale, palette: palette)
@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     lazy var paletteView: PaletteView = {
         let view = PaletteView.viewFromNib
 
-        view.present(model: self.palette)
+        view.present(viewModel: self.palette)
 
         return view
     }()

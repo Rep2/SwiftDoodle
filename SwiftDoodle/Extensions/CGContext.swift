@@ -17,7 +17,7 @@ extension CGContext {
         }
     }
 
-    static func context(withSize size: CGSize, scale: CGFloat, palette: PaletteModel) -> CGContext {
+    static func context(withSize size: CGSize, scale: CGFloat, palette: PaletteViewModel) -> CGContext {
         let context = CGContext(
             data: nil,
             width: Int(size.width * scale),

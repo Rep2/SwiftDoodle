@@ -20,7 +20,7 @@ public class DrawView: UIView {
     let scale: CGFloat
 
     /// Palette used to customize drawing
-    var palette: PaletteModel
+    var palette: PaletteViewModel
 
     /*
      Resizes the drawing context on view resize.
@@ -44,7 +44,7 @@ public class DrawView: UIView {
         }
     }
 
-    public init(scale: CGFloat, palette: PaletteModel, frame: CGRect = .zero) {
+    public init(scale: CGFloat, palette: PaletteViewModel, frame: CGRect = .zero) {
         self.scale = scale
         self.palette = palette
 

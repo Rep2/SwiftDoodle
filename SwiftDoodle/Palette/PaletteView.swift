@@ -2,7 +2,7 @@ import UIKit
 import ChameleonFramework
 
 protocol PaletteViewEventHandler: class {
-    func modelDidChange(model: PaletteModel)
+    func modelDidChange(model: PaletteViewModel)
 }
 
 public final class PaletteView: UIView, FromNib {
@@ -26,14 +26,14 @@ public final class PaletteView: UIView, FromNib {
         roundCorners([.topLeft, .topRight], radius: 10)
     }
 
-    public func present(model: PaletteModel) {
-        switch model.tool {
+    public func present(viewModel: PaletteViewModel) {
+        switch viewModel.tool {
         case .eraser:
             drawToolSegmentedControl.selectedSegmentIndex = 1
         default:
             drawToolSegmentedControl.selectedSegmentIndex = 0
         }
 
-        drawWidthSlider.value = model.width
+        drawWidthSlider.value = viewModel.width
     }
 }
