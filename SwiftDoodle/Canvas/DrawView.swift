@@ -20,7 +20,7 @@ public class DrawView: UIView {
     let scale: CGFloat
 
     /// Palette used to customize drawing
-    var palette: Palette
+    var palette: PaletteModel
 
     /*
      Resizes the drawing context on view resize.
@@ -44,7 +44,7 @@ public class DrawView: UIView {
         }
     }
 
-    public init(scale: CGFloat, palette: Palette, frame: CGRect = .zero) {
+    public init(scale: CGFloat, palette: PaletteModel, frame: CGRect = .zero) {
         self.scale = scale
         self.palette = palette
 
@@ -79,7 +79,7 @@ public class DrawView: UIView {
             .reduce(CGRect.zero) { updateRect, points in
                 self.drawingContext.draw(points: points)
 
-                return Point.updateRect(for: points, lineWidth: palette.width).union(updateRect)
+                return Point.updateRect(for: points, lineWidth: CGFloat(palette.width)).union(updateRect)
             }
 
         setNeedsDisplay(updateRect)

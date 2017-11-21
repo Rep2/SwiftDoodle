@@ -17,9 +17,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="R9C-68-SDs">
-                    <rect key="frame" x="16" y="16" width="134" height="49"/>
+                    <rect key="frame" x="16" y="16" width="160" height="49"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="134" id="O9V-ZV-dWS"/>
+                        <constraint firstAttribute="width" constant="160" id="O9V-ZV-dWS"/>
                         <constraint firstAttribute="height" constant="48" id="s8n-uu-R2N"/>
                     </constraints>
                     <segments>
@@ -28,10 +28,10 @@
                     </segments>
                 </segmentedControl>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="vf3-Fw-4CS">
-                    <rect key="frame" x="14" y="80" width="138" height="31"/>
+                    <rect key="frame" x="14" y="80" width="164" height="31"/>
                 </slider>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZTU-T2-9lD">
-                    <rect key="frame" x="166" y="16" width="262" height="94"/>
+                    <rect key="frame" x="192" y="16" width="236" height="94"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="za2-le-oLR">
                         <size key="itemSize" width="50" height="50"/>
