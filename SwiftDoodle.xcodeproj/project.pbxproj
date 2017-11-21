@@ -17,8 +17,6 @@
 		F65F00C41FBF2C5C00B55058 /* SwiftDoodle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F65F00C91FBF5E0F00B55058 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F00C81FBF5E0F00B55058 /* Point.swift */; };
 		F65F00CB1FBF647800B55058 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F00CA1FBF647800B55058 /* Line.swift */; };
-		F65F00CD1FBF650100B55058 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F00CC1FBF650100B55058 /* CanvasView.swift */; };
-		F65F00CF1FBF66ED00B55058 /* CanvasViewTouchEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F00CE1FBF66ED00B55058 /* CanvasViewTouchEvents.swift */; };
 		F65F00D21FBF6F6000B55058 /* CGContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F00D11FBF6F6000B55058 /* CGContext.swift */; };
 		F65F89111FC37B7E0044715A /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F89101FC37B7E0044715A /* ApplicationManager.swift */; };
 		F66429121FBF27B100317721 /* SwiftDoodle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; };
@@ -29,6 +27,7 @@
 		F66429301FBF286F00317721 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F664292F1FBF286F00317721 /* Assets.xcassets */; };
 		F66429331FBF286F00317721 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F66429311FBF286F00317721 /* LaunchScreen.storyboard */; };
 		F6AE8CB41FC26CAF00EC1E6C /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AE8CB31FC26CAF00EC1E6C /* PaletteView.swift */; };
+		F6E249F51FC45DF300A1DC87 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E249F41FC45DF300A1DC87 /* DrawView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,8 +94,6 @@
 		F65402E11FC0E82700A9E39B /* SafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeArray.swift; sourceTree = "<group>"; };
 		F65F00C81FBF5E0F00B55058 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		F65F00CA1FBF647800B55058 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
-		F65F00CC1FBF650100B55058 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
-		F65F00CE1FBF66ED00B55058 /* CanvasViewTouchEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewTouchEvents.swift; sourceTree = "<group>"; };
 		F65F00D11FBF6F6000B55058 /* CGContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGContext.swift; sourceTree = "<group>"; };
 		F65F89101FC37B7E0044715A /* ApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationManager.swift; sourceTree = "<group>"; };
 		F66429081FBF27B100317721 /* SwiftDoodle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftDoodle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +113,7 @@
 		F66429441FBF286F00317721 /* SwiftDoodleDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDoodleDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F664294A1FBF286F00317721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6AE8CB31FC26CAF00EC1E6C /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
+		F6E249F41FC45DF300A1DC87 /* DrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,8 +297,7 @@
 			children = (
 				F65F00C81FBF5E0F00B55058 /* Point.swift */,
 				F65F00CA1FBF647800B55058 /* Line.swift */,
-				F65F00CC1FBF650100B55058 /* CanvasView.swift */,
-				F65F00CE1FBF66ED00B55058 /* CanvasViewTouchEvents.swift */,
+				F6E249F41FC45DF300A1DC87 /* DrawView.swift */,
 			);
 			path = Canvas;
 			sourceTree = "<group>";
@@ -801,11 +798,10 @@
 			files = (
 				F65F00CB1FBF647800B55058 /* Line.swift in Sources */,
 				F6AE8CB41FC26CAF00EC1E6C /* PaletteView.swift in Sources */,
+				F6E249F51FC45DF300A1DC87 /* DrawView.swift in Sources */,
 				F65F00C91FBF5E0F00B55058 /* Point.swift in Sources */,
-				F65F00CF1FBF66ED00B55058 /* CanvasViewTouchEvents.swift in Sources */,
 				F65402E21FC0E82700A9E39B /* SafeArray.swift in Sources */,
 				F65F00D21FBF6F6000B55058 /* CGContext.swift in Sources */,
-				F65F00CD1FBF650100B55058 /* CanvasView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,36 +1,50 @@
 import UIKit
 
-public class CanvasView: UIView {
+/*
+ UIView that supports drawing.
 
-    // MARK: Properties
+ Works with both AutoLayout and frames.
 
+ On resize updates drawing context,
+ but discards all changes outside of the new bounds.
+ */
+public class DrawView: UIView {
+
+    /// Lines currently being drawn
     let activeLines: NSMapTable<UITouch, Line> = NSMapTable.strongToStrongObjects()
 
-    /// A `CGContext` for drawing the last representation of lines no longer receiving updates into.
-    var frozenContext: CGContext!
+    /// Context used to draw
+    var drawingContext: CGContext!
 
+    /// Screen scale used to create context
     let scale: CGFloat
 
-    var originalBounds: CGRect!
+    /*
+     Resizes the drawing context on view resize.
 
+     Discards any data outside out of the new bounds.
+    */
     override public var bounds: CGRect {
         didSet {
-            if originalBounds == nil {
-                originalBounds = bounds
-                frozenContext = CGContext.context(withSize: bounds.size, scale: scale)
-            }
+            // Currently displayed image
+            let oldImage = drawingContext?.makeImage()
 
-            originalBounds.origin.x = max(0, (bounds.width - originalBounds.width) / 2)
-            originalBounds.origin.y = max(0, (bounds.height - originalBounds.height) / 2)
+            // Creates context with new view size
+            drawingContext = CGContext.context(withSize: bounds.size, scale: scale)
+
+            // If old image exists, draw it on a new context
+            if let oldImage = oldImage {
+                drawingContext.draw(oldImage, in: oldValue)
+            }
 
             setNeedsDisplay()
         }
     }
 
-    public init(scale: CGFloat) {
+    public init(scale: CGFloat, frame: CGRect = .zero) {
         self.scale = scale
 
-        super.init(frame: .zero)
+        super.init(frame: frame)
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -43,9 +57,10 @@ public class CanvasView: UIView {
         if let context = UIGraphicsGetCurrentContext() {
             context.setLineCap(.round)
 
-            frozenContext
-                .makeImage()
-                .flatMap { context.draw($0, in: originalBounds) }
+            // Draws new image in the current context
+            if let newImage = drawingContext.makeImage() {
+                context.draw(newImage, in: bounds)
+            }
         }
     }
 
@@ -58,7 +73,7 @@ public class CanvasView: UIView {
 
         let updateRect = linesToBeDrawn
             .reduce(CGRect.zero) { updateRect, points in
-                self.frozenContext.draw(points: points)
+                self.drawingContext.draw(points: points)
 
                 return Point.updateRect(for: points, magnitude: 10).union(updateRect)
             }
@@ -75,7 +90,7 @@ public class CanvasView: UIView {
     /// Removes all drawing data
     public func clear() {
         activeLines.removeAllObjects()
-        frozenContext.clear(bounds)
+        drawingContext.clear(bounds)
         setNeedsDisplay()
     }
 
@@ -102,5 +117,24 @@ public class CanvasView: UIView {
         activeLines.setObject(newLine, forKey: touch)
 
         return newLine
+    }
+}
+
+extension DrawView {
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        drawTouches(touches: touches, withEvent: event)
+    }
+
+    override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        drawTouches(touches: touches, withEvent: event)
+    }
+
+    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        drawTouches(touches: touches, withEvent: event)
+        endTouches(touches: touches)
+    }
+
+    override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        endTouches(touches: touches)
     }
 }
