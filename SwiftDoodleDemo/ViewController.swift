@@ -14,9 +14,7 @@ class ViewController: UIViewController {
     }()
 
     lazy var paletteView: PaletteView = {
-        let view = PaletteView(containerSize: self.view.bounds.size, location: .right)
-
-        view.backgroundColor = .black
+        let view = PaletteView.viewFromNib
 
         return view
     }()
@@ -31,9 +29,17 @@ class ViewController: UIViewController {
         title = "Demo"
 
         view.addSubview(canvasView)
+        view.addSubview(paletteView)
 
         canvasView.snp.makeConstraints { view in
             view.edges.equalTo(self.view)
+        }
+
+        paletteView.snp.makeConstraints { view in
+            view.height.equalTo(126)
+            view.width.equalTo(440)
+            view.bottom.equalTo(self.view)
+            view.centerX.equalTo(self.view)
         }
     }
 }

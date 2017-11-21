@@ -68,7 +68,7 @@ public class DrawView: UIView {
         }
     }
 
-    func drawTouches(touches: Set<UITouch>, withEvent event: UIEvent?) {
+   fileprivate func drawTouches(touches: Set<UITouch>, withEvent event: UIEvent?) {
         var linesToBeDrawn = [[Point]]()
 
         touches.forEach { touch in
@@ -85,7 +85,7 @@ public class DrawView: UIView {
         setNeedsDisplay(updateRect)
     }
 
-    func endTouches(touches: Set<UITouch>) {
+    fileprivate func endTouches(touches: Set<UITouch>) {
         touches.forEach(activeLines.removeObject)
     }
 

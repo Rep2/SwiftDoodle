@@ -29,6 +29,9 @@
 		F6AE8CB41FC26CAF00EC1E6C /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AE8CB31FC26CAF00EC1E6C /* PaletteView.swift */; };
 		F6E249F51FC45DF300A1DC87 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E249F41FC45DF300A1DC87 /* DrawView.swift */; };
 		F6E249F71FC462FB00A1DC87 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E249F61FC462FB00A1DC87 /* Palette.swift */; };
+		F6E249F91FC4757300A1DC87 /* PaletteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6E249F81FC4757300A1DC87 /* PaletteView.xib */; };
+		F6E249FC1FC49A4D00A1DC87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6E249FB1FC49A4D00A1DC87 /* Assets.xcassets */; };
+		F6E249FF1FC4A25C00A1DC87 /* FromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E249FE1FC4A25C00A1DC87 /* FromNib.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +119,9 @@
 		F6AE8CB31FC26CAF00EC1E6C /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		F6E249F41FC45DF300A1DC87 /* DrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		F6E249F61FC462FB00A1DC87 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		F6E249F81FC4757300A1DC87 /* PaletteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaletteView.xib; sourceTree = "<group>"; };
+		F6E249FB1FC49A4D00A1DC87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F6E249FE1FC4A25C00A1DC87 /* FromNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromNib.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				F65402E11FC0E82700A9E39B /* SafeArray.swift */,
+				F6E249FE1FC4A25C00A1DC87 /* FromNib.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -245,6 +252,7 @@
 		F664290A1FBF27B100317721 /* SwiftDoodle */ = {
 			isa = PBXGroup;
 			children = (
+				F6E249FA1FC49A2300A1DC87 /* Resources */,
 				F6AE8CB21FC26CA400EC1E6C /* Palette */,
 				F65402E01FC0E7CD00A9E39B /* Helpers */,
 				F65F00D01FBF6F4F00B55058 /* Extensions */,
@@ -300,7 +308,6 @@
 				F65F00C81FBF5E0F00B55058 /* Point.swift */,
 				F65F00CA1FBF647800B55058 /* Line.swift */,
 				F6E249F41FC45DF300A1DC87 /* DrawView.swift */,
-				F6E249F61FC462FB00A1DC87 /* Palette.swift */,
 			);
 			path = Canvas;
 			sourceTree = "<group>";
@@ -309,8 +316,18 @@
 			isa = PBXGroup;
 			children = (
 				F6AE8CB31FC26CAF00EC1E6C /* PaletteView.swift */,
+				F6E249F81FC4757300A1DC87 /* PaletteView.xib */,
+				F6E249F61FC462FB00A1DC87 /* Palette.swift */,
 			);
 			path = Palette;
+			sourceTree = "<group>";
+		};
+		F6E249FA1FC49A2300A1DC87 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F6E249FB1FC49A4D00A1DC87 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -496,6 +513,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6E249FC1FC49A4D00A1DC87 /* Assets.xcassets in Resources */,
+				F6E249F91FC4757300A1DC87 /* PaletteView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,11 +640,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodleTests/Pods-SwiftDoodleTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -640,10 +659,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodleDemo/Pods-SwiftDoodleDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -804,6 +825,7 @@
 				F6E249F51FC45DF300A1DC87 /* DrawView.swift in Sources */,
 				F65F00C91FBF5E0F00B55058 /* Point.swift in Sources */,
 				F65402E21FC0E82700A9E39B /* SafeArray.swift in Sources */,
+				F6E249FF1FC4A25C00A1DC87 /* FromNib.swift in Sources */,
 				F65F00D21FBF6F6000B55058 /* CGContext.swift in Sources */,
 				F6E249F71FC462FB00A1DC87 /* Palette.swift in Sources */,
 			);

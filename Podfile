@@ -2,6 +2,8 @@ platform :ios, '10.0'
 
 target 'SwiftDoodle' do
   use_frameworks!
+ 
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 
   target 'SwiftDoodleTests' do
     inherit! :search_paths

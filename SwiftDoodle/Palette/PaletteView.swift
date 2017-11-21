@@ -1,41 +1,20 @@
 import UIKit
+import ChameleonFramework
 
-public class PaletteView: UIView {
-    public enum Location {
-        case left
-        case right
-        case bottom
+public final class PaletteView: UIView, FromNib {
+    @IBOutlet fileprivate weak var drawToolSegmentedControl: UISegmentedControl!
+    @IBOutlet fileprivate weak var drawWidthSlider: UISlider!
+    @IBOutlet fileprivate weak var colorPickerImageView: UICollectionView!
 
-        func frame(containerSize: CGSize) -> CGRect {
-            switch self {
-            case .left:
-                return CGRect(x: -perpendicularLength, y: 0, width: perpendicularLength, height: containerSize.height)
-            case .right:
-                return CGRect(x: containerSize.width + perpendicularLength, y: 0, width: perpendicularLength, height: containerSize.height)
-            case .bottom:
-                return CGRect(x: 0, y: containerSize.height + perpendicularLength, width: containerSize.width, height: perpendicularLength)
-            }
-        }
+    public override func awakeFromNib() {
+        super.awakeFromNib()
 
-        var perpendicularLength: CGFloat {
-            switch self {
-            case .left, .right:
-                return 100
-            case .bottom:
-                return 150
-            }
-        }
-    }
+        drawToolSegmentedControl.layer.cornerRadius = drawToolSegmentedControl.bounds.height / 2
+        drawToolSegmentedControl.layer.borderWidth = 1
+        drawToolSegmentedControl.layer.masksToBounds = true
+        drawToolSegmentedControl.layer.borderColor = UIColor.flatSkyBlue.cgColor
+        drawToolSegmentedControl.tintColor = UIColor.flatSkyBlue
 
-    let location: Location
-
-    public init(containerSize: CGSize, location: Location) {
-        self.location = location
-
-        super.init(frame: location.frame(containerSize: containerSize))
-    }
-
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        drawWidthSlider.tintColor = UIColor.flatSkyBlue
     }
 }
