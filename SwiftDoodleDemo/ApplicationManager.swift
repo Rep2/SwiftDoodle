@@ -1,21 +1,9 @@
 import UIKit
 
 class ApplicationManager {
-    static var shared: ApplicationManager!
+    static let shared = ApplicationManager()
 
-    lazy var rootNavigationController: UINavigationController = {
-        let rootViewController = ViewController()
-
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-
-        navigationController.navigationBar.isTranslucent = false
-
-        return navigationController
+    lazy var rootNavigationController: UIViewController = {
+        return ViewController()
     }()
-
-    let scale: CGFloat
-
-    init(scale: CGFloat) {
-        self.scale = scale
-    }
 }
