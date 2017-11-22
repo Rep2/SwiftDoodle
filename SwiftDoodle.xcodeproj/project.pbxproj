@@ -12,6 +12,7 @@
 		92B0795F4D269C16ECC12EBD /* Pods_SwiftDoodleDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D630237FEA8C80176DFF6F /* Pods_SwiftDoodleDemoUITests.framework */; };
 		D88AC4A294662D4869654996 /* Pods_SwiftDoodleDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0E64F93CD86A9C02D1C82F /* Pods_SwiftDoodleDemoTests.framework */; };
 		F089B5B4B191690AC74DE29F /* Pods_SwiftDoodle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57658AA19F5603B8A6FDD6 /* Pods_SwiftDoodle.framework */; };
+		F607F1181FC60F810014409A /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F607F1171FC60F810014409A /* CanvasViewController.swift */; };
 		F65402E21FC0E82700A9E39B /* SafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65402E11FC0E82700A9E39B /* SafeArray.swift */; };
 		F65F00C31FBF2C5C00B55058 /* SwiftDoodle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; };
 		F65F00C41FBF2C5C00B55058 /* SwiftDoodle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -100,6 +101,7 @@
 		B4D630237FEA8C80176DFF6F /* Pods_SwiftDoodleDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftDoodleDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF0E64F93CD86A9C02D1C82F /* Pods_SwiftDoodleDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftDoodleDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1FBD8D3373559AFC2625D02 /* Pods-SwiftDoodle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDoodle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDoodle/Pods-SwiftDoodle.debug.xcconfig"; sourceTree = "<group>"; };
+		F607F1171FC60F810014409A /* CanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
 		F65402E11FC0E82700A9E39B /* SafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeArray.swift; sourceTree = "<group>"; };
 		F65F00C81FBF5E0F00B55058 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		F65F00CA1FBF647800B55058 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				F66429561FBF2AC500317721 /* Canvas */,
 				F664290B1FBF27B100317721 /* SwiftDoodle.h */,
 				F664290C1FBF27B100317721 /* Info.plist */,
+				F607F1171FC60F810014409A /* CanvasViewController.swift */,
 			);
 			path = SwiftDoodle;
 			sourceTree = "<group>";
@@ -657,10 +660,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodleTests/Pods-SwiftDoodleTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -840,6 +845,7 @@
 				F6624BF01FC5D46B00CC784A /* Identifiable.swift in Sources */,
 				F6AE8CB41FC26CAF00EC1E6C /* PaletteView.swift in Sources */,
 				F6E249F51FC45DF300A1DC87 /* DrawView.swift in Sources */,
+				F607F1181FC60F810014409A /* CanvasViewController.swift in Sources */,
 				F65F00C91FBF5E0F00B55058 /* Point.swift in Sources */,
 				F6624BF21FC5D95800CC784A /* ImageFromColor.swift in Sources */,
 				F65402E21FC0E82700A9E39B /* SafeArray.swift in Sources */,

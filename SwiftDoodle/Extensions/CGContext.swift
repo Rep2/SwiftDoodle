@@ -1,10 +1,12 @@
 import UIKit
 
 extension CGContext {
-    func draw(points: [Point]) {
+    func draw(points: [Point], palette: PaletteViewModel) {
         var points = points
 
         if let firstPoint = try? points.remove(safeAtIndex: 0) {
+            setStrokeColor(palette.color.cgColor)
+            setLineWidth(CGFloat(palette.width))
 
             beginPath()
 
@@ -17,7 +19,7 @@ extension CGContext {
         }
     }
 
-    static func context(withSize size: CGSize, scale: CGFloat, palette: PaletteViewModel) -> CGContext {
+    static func context(withSize size: CGSize, scale: CGFloat) -> CGContext {
         let context = CGContext(
             data: nil,
             width: Int(size.width * scale),
@@ -32,9 +34,6 @@ extension CGContext {
 
         let transform = CGAffineTransform(scaleX: scale, y: scale)
         context.concatenate(transform)
-
-        context.setStrokeColor(palette.color.cgColor)
-        context.setLineWidth(CGFloat(palette.width))
 
         return context
     }

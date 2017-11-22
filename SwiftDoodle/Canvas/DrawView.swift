@@ -20,7 +20,7 @@ public class DrawView: UIView {
     let scale: CGFloat
 
     /// Palette used to customize drawing
-    var palette: PaletteViewModel
+    var paletteViewModel: PaletteViewModel
 
     /*
      Resizes the drawing context on view resize.
@@ -33,7 +33,7 @@ public class DrawView: UIView {
             let oldImage = drawingContext?.makeImage()
 
             // Creates context with new view size
-            drawingContext = CGContext.context(withSize: bounds.size, scale: scale, palette: palette)
+            drawingContext = CGContext.context(withSize: bounds.size, scale: scale)
 
             // If old image exists, draw it on a new context
             if let oldImage = oldImage {
@@ -44,9 +44,9 @@ public class DrawView: UIView {
         }
     }
 
-    public init(scale: CGFloat, palette: PaletteViewModel, frame: CGRect = .zero) {
+    public init(scale: CGFloat, paletteViewModel: PaletteViewModel, frame: CGRect = .zero) {
         self.scale = scale
-        self.palette = palette
+        self.paletteViewModel = paletteViewModel
 
         super.init(frame: frame)
     }
@@ -77,9 +77,9 @@ public class DrawView: UIView {
 
         let updateRect = linesToBeDrawn
             .reduce(CGRect.zero) { updateRect, points in
-                self.drawingContext.draw(points: points)
+                self.drawingContext.draw(points: points, palette: paletteViewModel)
 
-                return Point.updateRect(for: points, lineWidth: CGFloat(palette.width)).union(updateRect)
+                return Point.updateRect(for: points, lineWidth: CGFloat(paletteViewModel.width)).union(updateRect)
             }
 
         setNeedsDisplay(updateRect)
@@ -96,6 +96,10 @@ public class DrawView: UIView {
         activeLines.removeAllObjects()
         drawingContext.clear(bounds)
         setNeedsDisplay()
+    }
+
+    public func set(paletteViewModel: PaletteViewModel) {
+        self.paletteViewModel = paletteViewModel
     }
 
     // MARK: Convenience

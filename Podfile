@@ -4,6 +4,7 @@ target 'SwiftDoodle' do
   use_frameworks!
  
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+  pod 'SnapKit', '~> 4.0.0'
 
   target 'SwiftDoodleTests' do
     inherit! :search_paths
