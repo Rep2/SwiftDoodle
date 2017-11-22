@@ -38,8 +38,8 @@ class ViewController: UIViewController {
         }
 
         paletteView.snp.makeConstraints { view in
-            view.height.equalTo(126)
-            view.width.equalTo(440)
+            view.height.equalTo(142)
+            view.width.equalTo(498)
             view.bottom.equalTo(self.view)
             view.centerX.equalTo(self.view)
         }
