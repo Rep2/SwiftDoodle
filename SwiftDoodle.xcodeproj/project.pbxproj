@@ -219,6 +219,7 @@
 				F65402E11FC0E82700A9E39B /* SafeArray.swift */,
 				F6E249FE1FC4A25C00A1DC87 /* FromNib.swift */,
 				F6624BF11FC5D95800CC784A /* ImageFromColor.swift */,
+				F65F00D11FBF6F6000B55058 /* CGContext.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -228,14 +229,6 @@
 			children = (
 			);
 			path = "New Group";
-			sourceTree = "<group>";
-		};
-		F65F00D01FBF6F4F00B55058 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				F65F00D11FBF6F6000B55058 /* CGContext.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F66428FE1FBF27B100317721 = {
@@ -270,7 +263,6 @@
 				F6E249FA1FC49A2300A1DC87 /* Resources */,
 				F6AE8CB21FC26CA400EC1E6C /* Palette */,
 				F65402E01FC0E7CD00A9E39B /* Helpers */,
-				F65F00D01FBF6F4F00B55058 /* Extensions */,
 				F66429561FBF2AC500317721 /* Canvas */,
 				F664290B1FBF27B100317721 /* SwiftDoodle.h */,
 				F664290C1FBF27B100317721 /* Info.plist */,

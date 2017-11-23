@@ -5,7 +5,7 @@ extension CGContext {
         var points = points
 
         if let firstPoint = try? points.remove(safeAtIndex: 0) {
-            setStrokeColor(palette.color.cgColor)
+            setStrokeColor(palette.drawColor.cgColor)
             setLineWidth(CGFloat(palette.width))
 
             beginPath()
