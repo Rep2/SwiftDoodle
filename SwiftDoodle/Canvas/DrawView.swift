@@ -8,7 +8,7 @@ import UIKit
  On resize updates drawing context,
  but discards all changes outside of the new bounds.
  */
-public class DrawView: UIView {
+open class DrawView: UIView {
 
     /// Lines currently being drawn
     let activeLines: NSMapTable<UITouch, Line> = NSMapTable.strongToStrongObjects()
@@ -24,7 +24,7 @@ public class DrawView: UIView {
 
      Discards any data outside out of the new bounds.
     */
-    override public var bounds: CGRect {
+    override open var bounds: CGRect {
         didSet {
             // Currently displayed image
             let oldImage = drawingContext?.makeImage()
@@ -53,7 +53,7 @@ public class DrawView: UIView {
 
     // MARK: Drawing
 
-    override public func draw(_ rect: CGRect) {
+    override open func draw(_ rect: CGRect) {
         if let context = UIGraphicsGetCurrentContext() {
             context.setLineCap(.round)
 
@@ -125,20 +125,20 @@ public class DrawView: UIView {
 }
 
 extension DrawView {
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         drawTouches(touches: touches, withEvent: event)
     }
 
-    override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         drawTouches(touches: touches, withEvent: event)
     }
 
-    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         drawTouches(touches: touches, withEvent: event)
         endTouches(touches: touches)
     }
 
-    override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override open func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         endTouches(touches: touches)
     }
 }
