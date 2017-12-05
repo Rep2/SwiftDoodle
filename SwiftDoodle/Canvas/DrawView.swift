@@ -16,11 +16,8 @@ public class DrawView: UIView {
     /// Context used to draw
     var drawingContext: CGContext!
 
-    /// Screen scale used to create context
-    let scale: CGFloat
-
     /// Palette used to customize drawing
-    var paletteViewModel: PaletteViewModel
+    var paletteViewModel = PaletteViewModel.basic
 
     /*
      Resizes the drawing context on view resize.
@@ -33,7 +30,7 @@ public class DrawView: UIView {
             let oldImage = drawingContext?.makeImage()
 
             // Creates context with new view size
-            drawingContext = CGContext.context(withSize: bounds.size, scale: scale)
+            drawingContext = CGContext.context(withSize: bounds.size, scale: paletteViewModel.scale)
 
             // If old image exists, draw it on a new context
             if let oldImage = oldImage {
@@ -44,15 +41,14 @@ public class DrawView: UIView {
         }
     }
 
-    public init(scale: CGFloat, paletteViewModel: PaletteViewModel, frame: CGRect = .zero) {
-        self.scale = scale
+    public init(paletteViewModel: PaletteViewModel, frame: CGRect = .zero) {
         self.paletteViewModel = paletteViewModel
 
         super.init(frame: frame)
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
 
     // MARK: Drawing

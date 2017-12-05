@@ -3,11 +3,11 @@ import SnapKit
 
 open class CanvasViewController: UIViewController {
     lazy var paletteViewModel: PaletteViewModel = {
-        return PaletteViewModel(color: .black, width: 5, tool: .pencil, backgroundColor: self.view.backgroundColor ?? .white)
+        return PaletteViewModel(color: .black, width: 5, tool: .pencil, backgroundColor: self.view.backgroundColor ?? .white, scale: UIApplication.shared.keyWindow?.screen.scale ?? 2)
     }()
 
     lazy var canvasView: DrawView = {
-        let view = DrawView(scale: UIApplication.shared.keyWindow?.screen.scale ?? 2, paletteViewModel: paletteViewModel)
+        let view = DrawView(paletteViewModel: paletteViewModel)
 
         view.backgroundColor = .white
 

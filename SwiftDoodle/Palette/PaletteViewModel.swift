@@ -18,10 +18,23 @@ public class PaletteViewModel {
         }
     }
 
-    public init(color: UIColor, width: Float, tool: Tool, backgroundColor: UIColor) {
+    let scale: CGFloat
+
+    public init(color: UIColor, width: Float, tool: Tool, backgroundColor: UIColor, scale: CGFloat) {
         self.color = color
         self.width = width
         self.tool = tool
         self.backgroundColor = backgroundColor
+        self.scale = scale
+    }
+
+    static public var basic: PaletteViewModel {
+        return PaletteViewModel(
+            color: .black,
+            width: 5,
+            tool: .pencil,
+            backgroundColor: .white,
+            scale: 2
+        )
     }
 }
