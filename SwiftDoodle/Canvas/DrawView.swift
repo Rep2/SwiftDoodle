@@ -8,7 +8,7 @@ import UIKit
  On resize updates drawing context,
  but discards all changes outside of the new bounds.
  */
-public class DrawView: UIView {
+open class DrawView: UIView {
 
     /// Lines currently being drawn
     let activeLines: NSMapTable<UITouch, Line> = NSMapTable.strongToStrongObjects()
