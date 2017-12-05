@@ -14,7 +14,9 @@ open class DrawView: UIView {
     let activeLines: NSMapTable<UITouch, Line> = NSMapTable.strongToStrongObjects()
 
     /// Context used to draw
-    var drawingContext: CGContext!
+    lazy var drawingContext: CGContext = {
+        return CGContext.context(withSize: bounds.size, scale: paletteViewModel.scale)
+    }()
 
     /// Palette used to customize drawing
     var paletteViewModel = PaletteViewModel.basic
@@ -27,7 +29,7 @@ open class DrawView: UIView {
     override open var bounds: CGRect {
         didSet {
             // Currently displayed image
-            let oldImage = drawingContext?.makeImage()
+            let oldImage = drawingContext.makeImage()
 
             // Creates context with new view size
             drawingContext = CGContext.context(withSize: bounds.size, scale: paletteViewModel.scale)
@@ -39,16 +41,6 @@ open class DrawView: UIView {
 
             setNeedsDisplay()
         }
-    }
-
-    public init(paletteViewModel: PaletteViewModel, frame: CGRect = .zero) {
-        self.paletteViewModel = paletteViewModel
-
-        super.init(frame: frame)
-    }
-
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
 
     // MARK: Drawing
