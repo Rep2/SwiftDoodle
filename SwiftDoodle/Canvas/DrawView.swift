@@ -87,6 +87,8 @@ open class DrawView: UIView {
     }
 
     public func set(paletteViewModel: PaletteViewModel) {
+        backgroundColor = paletteViewModel.backgroundColor
+
         self.paletteViewModel = paletteViewModel
     }
 
