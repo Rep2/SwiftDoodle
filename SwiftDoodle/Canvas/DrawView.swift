@@ -25,7 +25,7 @@ open class DrawView: UIView {
      Resizes the drawing context on view resize.
 
      Discards any data outside out of the new bounds.
-    */
+     */
     override open var bounds: CGRect {
         didSet {
             // Currently displayed image
@@ -56,7 +56,9 @@ open class DrawView: UIView {
         }
     }
 
-   fileprivate func drawTouches(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    fileprivate func drawTouches(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard isDrawingEnabled else { return }
+
         var linesToBeDrawn = [[Point]]()
 
         touches.forEach { touch in
@@ -91,6 +93,8 @@ open class DrawView: UIView {
 
         self.paletteViewModel = paletteViewModel
     }
+
+    public var isDrawingEnabled = true
 
     // MARK: Convenience
 
