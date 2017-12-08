@@ -96,6 +96,10 @@ open class DrawView: UIView {
 
     public var isDrawingEnabled = true
 
+    public var currentImage: CGImage? {
+        return drawingContext.makeImage()
+    }
+
     // MARK: Convenience
 
     private func pointsToBeDrawn(associatedWith touch: UITouch, event: UIEvent?) -> [Point] {
