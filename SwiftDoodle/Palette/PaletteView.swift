@@ -102,10 +102,10 @@ extension PaletteView {
         UIColor.flatOrange,
         UIColor.flatYellow,
         UIColor.flatGreen,
+        UIColor.flatMintDark,
         UIColor.flatSkyBlue,
         UIColor.flatBlueDark,
         UIColor.flatPurple,
-        UIColor.flatMintDark,
         UIColor.white,
         UIColor.black
     ]
