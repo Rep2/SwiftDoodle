@@ -94,7 +94,7 @@ open class DrawView: UIView {
         self.paletteViewModel = paletteViewModel
     }
 
-    public var isDrawingEnabled = true
+    public var isDrawingEnabled = false
 
     // MARK: Convenience
 
