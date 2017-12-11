@@ -9,15 +9,6 @@ public class PaletteViewModel {
     var width: Float
     var backgroundColor: UIColor
 
-    var drawColor: UIColor {
-        switch tool {
-        case .pencil:
-            return color
-        case .eraser:
-            return backgroundColor
-        }
-    }
-
     let scale: CGFloat
 
     public init(color: UIColor, width: Float, tool: Tool, backgroundColor: UIColor, scale: CGFloat) {

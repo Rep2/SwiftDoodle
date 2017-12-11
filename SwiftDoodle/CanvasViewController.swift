@@ -9,7 +9,7 @@ open class CanvasViewController: UIViewController {
     lazy var canvasView: DrawView = {
         let view = DrawView(frame: .zero)
 
-        view.backgroundColor = .white
+        view.backgroundColor = .lightGray
 
         return view
     }()

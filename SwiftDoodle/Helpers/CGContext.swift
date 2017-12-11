@@ -5,18 +5,20 @@ extension CGContext {
         var points = points
 
         if let firstPoint = try? points.remove(safeAtIndex: 0) {
-            setStrokeColor(palette.drawColor.cgColor)
+            setBlendMode(palette.tool == .eraser ? .clear : .normal)
+
+            setStrokeColor(palette.color.cgColor)
             setLineWidth(CGFloat(palette.width))
 
             beginPath()
 
             move(to: CGPoint(x: firstPoint.location.x, y: firstPoint.location.y))
 
-            points
-                .forEach { addLine(to: CGPoint(x: $0.location.x, y: $0.location.y)) }
+            points.forEach { addLine(to: CGPoint(x: $0.location.x, y: $0.location.y)) }
 
             strokePath()
         }
+
     }
 
     static func context(withSize size: CGSize, scale: CGFloat) -> CGContext {
