@@ -18,7 +18,6 @@ extension CGContext {
 
             strokePath()
         }
-
     }
 
     static func context(withSize size: CGSize, scale: CGFloat) -> CGContext {
