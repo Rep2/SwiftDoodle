@@ -107,9 +107,7 @@ open class DrawView: UIView {
     public var isDrawingEnabled = true
 
     public var currentImage: UIImage? {
-        guard let cgImage = drawingContext.makeImage() else {
-            return nil
-        }
+        guard let cgImage = drawingContext.makeImage() else { return nil }
 
         return UIImage(cgImage: cgImage, scale: 1, orientation: .downMirrored)
     }
