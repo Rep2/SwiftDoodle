@@ -89,9 +89,19 @@ open class DrawView: UIView {
     }
 
     public func set(paletteViewModel: PaletteViewModel) {
-//        backgroundColor = paletteViewModel.backgroundColor
+        backgroundColor = paletteViewModel.backgroundColor
 
         self.paletteViewModel = paletteViewModel
+    }
+
+    public func set(image: CGImage?) {
+        drawingContext = CGContext.context(withSize: bounds.size, scale: paletteViewModel.scale)
+
+        if let image = image {
+            drawingContext.draw(image, in: bounds)
+        }
+
+        setNeedsDisplay()
     }
 
     public var isDrawingEnabled = true
