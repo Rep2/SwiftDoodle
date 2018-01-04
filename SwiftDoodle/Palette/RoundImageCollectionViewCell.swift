@@ -2,7 +2,9 @@ import UIKit
 
 class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
     @IBOutlet fileprivate weak var imageView: UIImageView!
-    var presentedColor: UIColor?
+
+    var selectedBorderColor: UIColor?
+    var notSelectedBorderColor: UIColor?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -15,23 +17,18 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
     }
 
     func present(color: UIColor) {
-        presentedColor = color
-
         imageView.image = UIImage.from(color: color, with: imageView.bounds.size)
 
-        if color == .white {
-            imageView.layer.borderColor = UIColor.lightGray.cgColor
-            imageView.layer.borderWidth = 1
-        }
+        notSelectedBorderColor = color == .white ? .lightGray : color
+        selectedBorderColor = color == .black ? .lightGray : .black
+
+        imageView.layer.borderColor = notSelectedBorderColor?.cgColor
+        imageView.layer.borderWidth = 1
     }
 
     override var isSelected: Bool {
         didSet {
-            if isSelected {
-                imageView.layer.borderWidth = 1
-            } else {
-                imageView.layer.borderWidth = 0
-            }
+            imageView.layer.borderColor = isSelected ? selectedBorderColor?.cgColor : notSelectedBorderColor?.cgColor
         }
     }
 }
