@@ -90,6 +90,9 @@ extension PaletteView: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let viewModel = viewModel, let selectedColor = PaletteView.paletteColors.get(atIndex: indexPath.row) {
             viewModel.color = selectedColor
+            
+            viewModel.tool = .pencil
+            drawToolSegmentedControl.selectedSegmentIndex = 0
 
             eventHandler?.modelDidChange(viewModel: viewModel)
         }
