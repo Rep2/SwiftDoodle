@@ -98,15 +98,15 @@ extension PaletteView: UICollectionViewDelegate {
 
 extension PaletteView {
     static let paletteColors = [
-        UIColor.flatRed,
-        UIColor.flatOrange,
-        UIColor.flatYellow,
-        UIColor.flatGreen,
-        UIColor.flatMintDark,
-        UIColor.flatSkyBlue,
-        UIColor.flatBlueDark,
-        UIColor.flatPurple,
-        UIColor.white,
-        UIColor.black
-    ]
+        UIColor(hexString: "f23c17"),
+        UIColor(hexString: "f2bcb1"),
+        UIColor(hexString: "fcec41"),
+        UIColor(hexString: "a4c459"),
+        UIColor(hexString: "47a519"),
+        UIColor(hexString: "1860ce"),
+        UIColor(hexString: "7eabcb"),
+        UIColor(hexString: "97744c"),
+        UIColor(hexString: "ffffff"),
+        UIColor(hexString: "000000")
+        ].flatMap { $0 }
 }
