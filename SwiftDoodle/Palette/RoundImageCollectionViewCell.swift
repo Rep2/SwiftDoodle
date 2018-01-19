@@ -3,14 +3,10 @@ import UIKit
 class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
     @IBOutlet fileprivate weak var imageView: UIImageView!
 
-    var selectedBorderColor: UIColor?
-    var notSelectedBorderColor: UIColor?
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
         imageView.layer.cornerRadius = imageView.bounds.height / 2
-        imageView.layer.borderColor = UIColor.black.cgColor
         imageView.layer.masksToBounds = true
 
         backgroundColor = .clear
@@ -19,16 +15,16 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
     func present(color: UIColor) {
         imageView.image = UIImage.from(color: color, with: imageView.bounds.size)
 
-        notSelectedBorderColor = color == .white ? .lightGray : color
-        selectedBorderColor = color == .black ? .lightGray : .black
+        if let colorComponents = color.cgColor.components, colorComponents.count >= 3 {
+            let inverseColor = UIColor(red: 1 - colorComponents[0], green: 1 - colorComponents[1], blue: 1 - colorComponents[2], alpha: 1)
 
-        imageView.layer.borderColor = notSelectedBorderColor?.cgColor
-        imageView.layer.borderWidth = 1
+            imageView.layer.borderColor = inverseColor.cgColor
+        }
     }
 
     override var isSelected: Bool {
         didSet {
-            imageView.layer.borderColor = isSelected ? selectedBorderColor?.cgColor : notSelectedBorderColor?.cgColor
+            imageView.layer.borderWidth = isSelected ? 2.5 : 0
         }
     }
 }
