@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PaletteView" customModule="SwiftDoodle" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="562" height="142"/>
+            <rect key="frame" x="0.0" y="0.0" width="498" height="142"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="R9C-68-SDs">
@@ -31,7 +31,7 @@
                     </connections>
                 </segmentedControl>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="vf3-Fw-4CS">
-                    <rect key="frame" x="14" y="76" width="164" height="51"/>
+                    <rect key="frame" x="14" y="76" width="98" height="51"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="lgd-vL-FfQ"/>
                     </constraints>
@@ -58,10 +58,10 @@
                     </connections>
                 </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA2-UO-tdq">
-                    <rect key="frame" x="498" y="16" width="48" height="48"/>
+                    <rect key="frame" x="126" y="76" width="50" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="48" id="jez-mA-Y6f"/>
-                        <constraint firstAttribute="height" constant="48" id="znd-fp-qNw"/>
+                        <constraint firstAttribute="width" constant="50" id="jez-mA-Y6f"/>
+                        <constraint firstAttribute="height" constant="50" id="znd-fp-qNw"/>
                     </constraints>
                     <state key="normal" image="ic_undo"/>
                     <connections>
@@ -71,15 +71,15 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vf3-Fw-4CS" firstAttribute="trailing" secondItem="R9C-68-SDs" secondAttribute="trailing" id="1uq-K2-ugJ"/>
+                <constraint firstItem="AA2-UO-tdq" firstAttribute="trailing" secondItem="R9C-68-SDs" secondAttribute="trailing" id="8Ub-Zs-Mm1"/>
                 <constraint firstItem="vf3-Fw-4CS" firstAttribute="top" secondItem="R9C-68-SDs" secondAttribute="bottom" constant="10" id="9E4-ST-RRL"/>
-                <constraint firstItem="AA2-UO-tdq" firstAttribute="top" secondItem="R9C-68-SDs" secondAttribute="top" id="DFi-NS-rxK"/>
                 <constraint firstItem="R9C-68-SDs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="E6w-ZK-roh"/>
                 <constraint firstItem="vf3-Fw-4CS" firstAttribute="leading" secondItem="R9C-68-SDs" secondAttribute="leading" id="KVL-dk-aSP"/>
                 <constraint firstItem="R9C-68-SDs" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="LHg-w8-4Oj"/>
+                <constraint firstItem="AA2-UO-tdq" firstAttribute="top" secondItem="vf3-Fw-4CS" secondAttribute="top" id="SXK-Bs-mg0"/>
                 <constraint firstItem="ZTU-T2-9lD" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="avb-OJ-ULn"/>
                 <constraint firstItem="ZTU-T2-9lD" firstAttribute="leading" secondItem="R9C-68-SDs" secondAttribute="trailing" constant="16" id="iaF-5q-k7E"/>
-                <constraint firstItem="AA2-UO-tdq" firstAttribute="leading" secondItem="ZTU-T2-9lD" secondAttribute="trailing" constant="16" id="x7X-gp-yOD"/>
+                <constraint firstItem="AA2-UO-tdq" firstAttribute="leading" secondItem="vf3-Fw-4CS" secondAttribute="trailing" constant="16" id="lds-Cf-ml9"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -89,7 +89,7 @@
                 <outlet property="drawWidthSlider" destination="vf3-Fw-4CS" id="SsG-ID-j1C"/>
                 <outlet property="undoButton" destination="AA2-UO-tdq" id="A43-Md-aw0"/>
             </connections>
-            <point key="canvasLocation" x="-63" y="-246"/>
+            <point key="canvasLocation" x="-95.5" y="-246"/>
         </view>
     </objects>
     <resources>
