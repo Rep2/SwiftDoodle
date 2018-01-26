@@ -13,6 +13,8 @@ open class DrawView: UIView {
     /// Lines currently being drawn
     let activeLines: NSMapTable<UITouch, Line> = NSMapTable.strongToStrongObjects()
 
+    var finishedLines = [Line]()
+
     /// Context used to draw
     lazy var drawingContext: CGContext = {
         return CGContext.context(withSize: bounds.size, scale: paletteViewModel.scale)
@@ -76,7 +78,14 @@ open class DrawView: UIView {
     }
 
     fileprivate func endTouches(touches: Set<UITouch>) {
-        touches.forEach(activeLines.removeObject)
+        touches
+            .forEach {
+                if let line = activeLines.object(forKey: $0) {
+                    finishedLines.append(line)
+                }
+
+                activeLines.removeObject(forKey: $0)
+            }
     }
 
     // MARK: Actions

@@ -9,6 +9,7 @@ public final class PaletteView: UIView, FromNib {
     @IBOutlet fileprivate weak var drawToolSegmentedControl: UISegmentedControl!
     @IBOutlet fileprivate weak var drawWidthSlider: UISlider!
     @IBOutlet fileprivate weak var colorPickerImageView: UICollectionView!
+    @IBOutlet fileprivate weak var undoButton: UIButton!
 
     var viewModel: PaletteViewModel?
 
@@ -29,6 +30,8 @@ public final class PaletteView: UIView, FromNib {
         layer.cornerRadius = 10
 
         colorPickerImageView.registerNib(cellType: RoundImageCollectionViewCell.self)
+
+        undoButton.tintColor = UIColor.flatSkyBlue
     }
 
     public func present(viewModel: PaletteViewModel) {
@@ -50,6 +53,9 @@ public final class PaletteView: UIView, FromNib {
 
             eventHandler?.modelDidChange(viewModel: viewModel)
         }
+    }
+
+    @IBAction func didPressUndoButton(_ sender: Any) {
     }
 
     @IBAction func drawToolSelectedIndexValueChanged(_ sender: UISegmentedControl) {
@@ -90,7 +96,7 @@ extension PaletteView: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let viewModel = viewModel, let selectedColor = PaletteView.paletteColors.get(atIndex: indexPath.row) {
             viewModel.color = selectedColor
-            
+
             viewModel.tool = .pencil
             drawToolSegmentedControl.selectedSegmentIndex = 0
 

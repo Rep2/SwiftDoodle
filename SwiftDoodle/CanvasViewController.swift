@@ -39,7 +39,7 @@ open class CanvasViewController: UIViewController {
 
         paletteView.snp.makeConstraints { view in
             view.height.equalTo(142)
-            view.width.equalTo(498)
+            view.width.equalTo(562)
             view.bottom.equalTo(self.view)
             view.centerX.equalTo(self.view)
         }
