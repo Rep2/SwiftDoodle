@@ -6,6 +6,10 @@ struct Point {
         location = touch.preciseLocation(in: touch.view)
     }
 
+    static func updateRect(for line: Line) -> CGRect {
+        return updateRect(for: line.points, lineWidth: CGFloat(line.paletteViewModel.width))
+    }
+
     static func updateRect(for points: [Point], lineWidth: CGFloat) -> CGRect {
         var updateRect = CGRect.zero
 

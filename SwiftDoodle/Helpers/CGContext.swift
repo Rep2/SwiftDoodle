@@ -1,8 +1,9 @@
 import UIKit
 
 extension CGContext {
-    func draw(points: [Point], palette: PaletteViewModel) {
-        var points = points
+    func draw(line: Line) {
+        var points = line.points
+        let palette = line.paletteViewModel
 
         if let firstPoint = try? points.remove(safeAtIndex: 0) {
             setBlendMode(palette.tool == .eraser ? .clear : .normal)

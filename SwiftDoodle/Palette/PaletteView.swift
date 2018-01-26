@@ -3,6 +3,7 @@ import ChameleonFramework
 
 public protocol PaletteViewEventHandler: class {
     func modelDidChange(viewModel: PaletteViewModel)
+    func didPressUndoButton()
 }
 
 public final class PaletteView: UIView, FromNib {
@@ -56,6 +57,7 @@ public final class PaletteView: UIView, FromNib {
     }
 
     @IBAction func didPressUndoButton(_ sender: Any) {
+        eventHandler?.didPressUndoButton()
     }
 
     @IBAction func drawToolSelectedIndexValueChanged(_ sender: UISegmentedControl) {

@@ -61,17 +61,17 @@ open class DrawView: UIView {
     fileprivate func drawTouches(touches: Set<UITouch>, withEvent event: UIEvent?) {
         guard isDrawingEnabled else { return }
 
-        var linesToBeDrawn = [[Point]]()
+        var linesToBeDrawn = [Line]()
 
         touches.forEach { touch in
             linesToBeDrawn.append(self.pointsToBeDrawn(associatedWith: touch, event: event))
         }
 
         let updateRect = linesToBeDrawn
-            .reduce(CGRect.zero) { updateRect, points in
-                self.drawingContext.draw(points: points, palette: paletteViewModel)
+            .reduce(CGRect.zero) { updateRect, line in
+                self.drawingContext.draw(line: line)
 
-                return Point.updateRect(for: points, lineWidth: CGFloat(paletteViewModel.width)).union(updateRect)
+                return Point.updateRect(for: line).union(updateRect)
             }
 
         setNeedsDisplay(updateRect)
@@ -113,6 +113,20 @@ open class DrawView: UIView {
         setNeedsDisplay()
     }
 
+    public func undo() {
+        if !finishedLines.isEmpty {
+            finishedLines.removeLast()
+        }
+
+        drawingContext.clear(bounds)
+
+        finishedLines.forEach { line in
+            self.drawingContext.draw(line: line)
+        }
+
+        setNeedsDisplay()
+    }
+
     public var isDrawingEnabled = true
 
     public var currentImage: UIImage? {
@@ -123,13 +137,13 @@ open class DrawView: UIView {
 
     // MARK: Convenience
 
-    private func pointsToBeDrawn(associatedWith touch: UITouch, event: UIEvent?) -> [Point] {
+    private func pointsToBeDrawn(associatedWith touch: UITouch, event: UIEvent?) -> Line {
         let lineAssociatedWithTouch = line(for: touch)
 
         let coalescedTouches = event?.coalescedTouches(for: touch) ?? []
         lineAssociatedWithTouch.addPoints(for: coalescedTouches)
 
-        return lineAssociatedWithTouch.calculatePointsToBeDrawn()
+        return lineAssociatedWithTouch
     }
 
     /// Retrieve a line from `activeLines`. If no line exists, create one.
@@ -139,7 +153,7 @@ open class DrawView: UIView {
 
     /// Create a line associated with touch
     private func createLine(forTouch touch: UITouch) -> Line {
-        let newLine = Line()
+        let newLine = Line(paletteViewModel: PaletteViewModel(palletViewModel: paletteViewModel))
 
         activeLines.setObject(newLine, forKey: touch)
 

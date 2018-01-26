@@ -52,4 +52,8 @@ extension CanvasViewController: PaletteViewEventHandler {
 
         canvasView.set(paletteViewModel: paletteViewModel)
     }
+
+    public func didPressUndoButton() {
+        canvasView.undo()
+    }
 }

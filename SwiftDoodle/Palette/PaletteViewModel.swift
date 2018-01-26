@@ -19,6 +19,14 @@ public class PaletteViewModel {
         self.scale = scale
     }
 
+    public init(palletViewModel: PaletteViewModel) {
+        self.color = palletViewModel.color
+        self.width = palletViewModel.width
+        self.tool = palletViewModel.tool
+        self.backgroundColor = palletViewModel.backgroundColor
+        self.scale = palletViewModel.scale
+    }
+
     static public var basic: PaletteViewModel {
         return PaletteViewModel(
             color: .black,

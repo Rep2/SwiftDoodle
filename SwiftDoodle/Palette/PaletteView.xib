@@ -40,7 +40,7 @@
                     </connections>
                 </slider>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZTU-T2-9lD">
-                    <rect key="frame" x="256" y="16" width="290" height="110"/>
+                    <rect key="frame" x="192" y="16" width="290" height="110"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="110" id="c3m-ay-YGr"/>
@@ -58,7 +58,7 @@
                     </connections>
                 </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA2-UO-tdq">
-                    <rect key="frame" x="192" y="16" width="48" height="48"/>
+                    <rect key="frame" x="498" y="16" width="48" height="48"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="48" id="jez-mA-Y6f"/>
                         <constraint firstAttribute="height" constant="48" id="znd-fp-qNw"/>
@@ -78,8 +78,8 @@
                 <constraint firstItem="vf3-Fw-4CS" firstAttribute="leading" secondItem="R9C-68-SDs" secondAttribute="leading" id="KVL-dk-aSP"/>
                 <constraint firstItem="R9C-68-SDs" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="LHg-w8-4Oj"/>
                 <constraint firstItem="ZTU-T2-9lD" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="avb-OJ-ULn"/>
-                <constraint firstItem="ZTU-T2-9lD" firstAttribute="leading" secondItem="AA2-UO-tdq" secondAttribute="trailing" constant="16" id="uM8-vJ-GcV"/>
-                <constraint firstItem="AA2-UO-tdq" firstAttribute="leading" secondItem="R9C-68-SDs" secondAttribute="trailing" constant="16" id="xCc-0k-glp"/>
+                <constraint firstItem="ZTU-T2-9lD" firstAttribute="leading" secondItem="R9C-68-SDs" secondAttribute="trailing" constant="16" id="iaF-5q-k7E"/>
+                <constraint firstItem="AA2-UO-tdq" firstAttribute="leading" secondItem="ZTU-T2-9lD" secondAttribute="trailing" constant="16" id="x7X-gp-yOD"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
