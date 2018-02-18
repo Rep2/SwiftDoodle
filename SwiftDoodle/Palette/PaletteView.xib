@@ -30,7 +30,7 @@
                         <action selector="drawToolSelectedIndexValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="rkd-L1-I8O"/>
                     </connections>
                 </segmentedControl>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="vf3-Fw-4CS">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="vf3-Fw-4CS">
                     <rect key="frame" x="14" y="76" width="164" height="51"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="lgd-vL-FfQ"/>
