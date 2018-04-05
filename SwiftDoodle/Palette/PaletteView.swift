@@ -180,6 +180,8 @@ extension PaletteView: UICollectionViewDataSource {
                 strongSelf.brushSizePreview.isHidden = false
                 strongSelf.brushSizePreview.backgroundColor = initialColor
                 strongSelf.updateBrushSizePreview(to: 54)
+
+                strongSelf.colorPickerImageView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
             case .changed:
                 let xChange = newXLocation - startXPosition
                 let boundedSliderChange = max(min(xChange / (strongSelf.colorSaturationSliderWidth / 2), 1), -1)
