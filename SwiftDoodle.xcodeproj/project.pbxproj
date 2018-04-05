@@ -32,6 +32,7 @@
 		F664292E1FBF286F00317721 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F664292C1FBF286F00317721 /* Main.storyboard */; };
 		F66429301FBF286F00317721 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F664292F1FBF286F00317721 /* Assets.xcassets */; };
 		F66429331FBF286F00317721 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F66429311FBF286F00317721 /* LaunchScreen.storyboard */; };
+		F67ECD622076637F00780744 /* Saturation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67ECD612076637F00780744 /* Saturation.swift */; };
 		F6AE8CB41FC26CAF00EC1E6C /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AE8CB31FC26CAF00EC1E6C /* PaletteView.swift */; };
 		F6E249F51FC45DF300A1DC87 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E249F41FC45DF300A1DC87 /* DrawView.swift */; };
 		F6E249F71FC462FB00A1DC87 /* PaletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E249F61FC462FB00A1DC87 /* PaletteViewModel.swift */; };
@@ -128,6 +129,7 @@
 		F664293F1FBF286F00317721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F66429441FBF286F00317721 /* SwiftDoodleDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDoodleDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F664294A1FBF286F00317721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F67ECD612076637F00780744 /* Saturation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saturation.swift; sourceTree = "<group>"; };
 		F6AE8CB31FC26CAF00EC1E6C /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		F6E249F41FC45DF300A1DC87 /* DrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		F6E249F61FC462FB00A1DC87 /* PaletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteViewModel.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				F6E249FE1FC4A25C00A1DC87 /* FromNib.swift */,
 				F6624BF11FC5D95800CC784A /* ImageFromColor.swift */,
 				F65F00D11FBF6F6000B55058 /* CGContext.swift */,
+				F67ECD612076637F00780744 /* Saturation.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -840,6 +843,7 @@
 				F607F1181FC60F810014409A /* CanvasViewController.swift in Sources */,
 				F65F00C91FBF5E0F00B55058 /* Point.swift in Sources */,
 				F6624BF21FC5D95800CC784A /* ImageFromColor.swift in Sources */,
+				F67ECD622076637F00780744 /* Saturation.swift in Sources */,
 				F65402E21FC0E82700A9E39B /* SafeArray.swift in Sources */,
 				F6624BEA1FC5D2FE00CC784A /* RoundImageCollectionViewCell.swift in Sources */,
 				F6E249FF1FC4A25C00A1DC87 /* FromNib.swift in Sources */,

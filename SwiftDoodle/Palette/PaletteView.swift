@@ -158,8 +158,10 @@ extension PaletteView: UICollectionViewDataSource {
         return 1
     }
 
-    func didLongPressCellCallback(at: IndexPath) -> (UILongPressGestureRecognizer) -> Void {
+    func didLongPressCellCallback(at indexPath: IndexPath) -> (UILongPressGestureRecognizer) -> Void {
         var startXPosition: Float!
+        let initialColor = PaletteView.paletteColors.get(atIndex: indexPath.row)
+        var shiftedColor: UIColor?
 
         return { [weak self] gestureRecognizer in
             guard let strongSelf = self else { return }
@@ -175,20 +177,30 @@ extension PaletteView: UICollectionViewDataSource {
                 strongSelf.colorSaturationSlider.isHidden = false
                 strongSelf.colorSaturationSlider.value = 0.5
 
-                if let viewModel = strongSelf.viewModel {
-                    strongSelf.brushSizePreview.isHidden = false
-                    strongSelf.brushSizePreview.backgroundColor = viewModel.color
-                    strongSelf.updateBrushSizePreview(to: viewModel.width)
-                }
+                strongSelf.brushSizePreview.isHidden = false
+                strongSelf.brushSizePreview.backgroundColor = initialColor
+                strongSelf.updateBrushSizePreview(to: 54)
             case .changed:
                 let xChange = newXLocation - startXPosition
                 let boundedSliderChange = max(min(xChange / (strongSelf.colorSaturationSliderWidth / 2), 1), -1)
                 let shiftedSliderChange = (boundedSliderChange + 1) / 2
 
+                shiftedColor = initialColor?.with(saturationOffset: CGFloat(shiftedSliderChange))
+                strongSelf.brushSizePreview.backgroundColor = shiftedColor
+
                 strongSelf.colorSaturationSlider.setValue(shiftedSliderChange, animated: true)
             case .ended, .cancelled, .failed:
                 strongSelf.colorSaturationSlider.isHidden = true
                 strongSelf.brushSizePreview.isHidden = true
+
+                if let shiftedColor = shiftedColor, let viewModel = strongSelf.viewModel {
+                    viewModel.color = shiftedColor
+
+                    viewModel.tool = .pencil
+                    strongSelf.drawToolSegmentedControl.selectedSegmentIndex = 0
+
+                    strongSelf.eventHandler?.modelDidChange(viewModel: viewModel)
+                }
             default:
                 break
             }
@@ -211,27 +223,17 @@ extension PaletteView: UICollectionViewDelegate {
 
 extension PaletteView {
     static let paletteColors: [UIColor] = {
-        let color = UIColor(hexString: "ff0000")!
-
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-
-        guard color.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
-//            throw GenericError.error(text: "Failed to decode Command")
-            return []
-        }
-
-        return stride(from: 0.2 as CGFloat, to: 1 as CGFloat, by: 0.08 as CGFloat)
-            .map {
-                if $0 < 0.5 {
-                    return UIColor(red: red * $0 * 2, green: green * $0 * 2, blue: blue * $0 * 2, alpha: 1)
-                } else {
-                    let factor = 2 * ($0 - 0.5)
-
-                    return UIColor(red: red + (1 - red) * factor, green: green + (1 - green) * factor, blue: blue + (1 - blue) * factor, alpha: 1)
-                }
-            }
+        return [
+            UIColor.flatRed,
+            UIColor.flatOrange,
+            UIColor.flatYellow,
+            UIColor.flatGreen,
+            UIColor.flatMintDark,
+            UIColor.flatSkyBlue,
+            UIColor.flatBlueDark,
+            UIColor.flatPurple,
+            UIColor.white,
+            UIColor.black
+        ]
     }()
 }
