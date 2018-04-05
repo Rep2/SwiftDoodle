@@ -23,6 +23,7 @@ opt_in_rules:
 identifier_name:
   excluded:
     - id
+    - at
 line_length: 196
 number_separator:
   minimum_length: 5

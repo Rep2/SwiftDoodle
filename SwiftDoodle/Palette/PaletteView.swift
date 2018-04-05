@@ -22,6 +22,27 @@ public final class PaletteView: UIView, FromNib {
         return view
     }()
 
+    let colorSaturationSliderWidth: Float = 164
+
+    lazy var colorSaturationSlider: UISlider = {
+        let slider = UISlider()
+
+        slider.isHidden = true
+        slider.minimumValue = 0
+        slider.maximumValue = 1
+
+        self.addSubview(slider)
+
+        slider.snp.makeConstraints { make in
+            make.width.equalTo(colorSaturationSliderWidth)
+            make.height.equalTo(50)
+            make.centerX.equalTo(self)
+            make.top.equalTo(self.snp.top).offset(-74)
+        }
+
+        return slider
+    }()
+
     var viewModel: PaletteViewModel?
 
     public weak var eventHandler: PaletteViewEventHandler?
@@ -127,7 +148,7 @@ extension PaletteView: UICollectionViewDataSource {
         let cell = collectionView.cell(for: indexPath) as RoundImageCollectionViewCell
 
         if let color = PaletteView.paletteColors.get(atIndex: indexPath.row) {
-            cell.present(color: color)
+            cell.present(color: color, longPressCallback: didLongPressCellCallback(at: indexPath))
         }
 
         return cell
@@ -135,6 +156,43 @@ extension PaletteView: UICollectionViewDataSource {
 
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
+    }
+
+    func didLongPressCellCallback(at: IndexPath) -> (UILongPressGestureRecognizer) -> Void {
+        var startXPosition: Float!
+
+        return { [weak self] gestureRecognizer in
+            guard let strongSelf = self else { return }
+
+            let newXLocation = Float(gestureRecognizer.location(in: strongSelf).x)
+
+            if startXPosition == nil {
+                startXPosition = newXLocation
+            }
+
+            switch gestureRecognizer.state {
+            case .began:
+                strongSelf.colorSaturationSlider.isHidden = false
+                strongSelf.colorSaturationSlider.value = 0.5
+
+                if let viewModel = strongSelf.viewModel {
+                    strongSelf.brushSizePreview.isHidden = false
+                    strongSelf.brushSizePreview.backgroundColor = viewModel.color
+                    strongSelf.updateBrushSizePreview(to: viewModel.width)
+                }
+            case .changed:
+                let xChange = newXLocation - startXPosition
+                let boundedSliderChange = max(min(xChange / (strongSelf.colorSaturationSliderWidth / 2), 1), -1)
+                let shiftedSliderChange = (boundedSliderChange + 1) / 2
+
+                strongSelf.colorSaturationSlider.setValue(shiftedSliderChange, animated: true)
+            case .ended, .cancelled, .failed:
+                strongSelf.colorSaturationSlider.isHidden = true
+                strongSelf.brushSizePreview.isHidden = true
+            default:
+                break
+            }
+        }
     }
 }
 
@@ -152,16 +210,28 @@ extension PaletteView: UICollectionViewDelegate {
 }
 
 extension PaletteView {
-    static let paletteColors = [
-        UIColor(hexString: "f23c17"),
-        UIColor(hexString: "f2bcb1"),
-        UIColor(hexString: "fcec41"),
-        UIColor(hexString: "a4c459"),
-        UIColor(hexString: "47a519"),
-        UIColor(hexString: "1860ce"),
-        UIColor(hexString: "7eabcb"),
-        UIColor(hexString: "97744c"),
-        UIColor(hexString: "ffffff"),
-        UIColor(hexString: "000000")
-        ].flatMap { $0 }
+    static let paletteColors: [UIColor] = {
+        let color = UIColor(hexString: "ff0000")!
+
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+
+        guard color.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
+//            throw GenericError.error(text: "Failed to decode Command")
+            return []
+        }
+
+        return stride(from: 0.2 as CGFloat, to: 1 as CGFloat, by: 0.08 as CGFloat)
+            .map {
+                if $0 < 0.5 {
+                    return UIColor(red: red * $0 * 2, green: green * $0 * 2, blue: blue * $0 * 2, alpha: 1)
+                } else {
+                    let factor = 2 * ($0 - 0.5)
+
+                    return UIColor(red: red + (1 - red) * factor, green: green + (1 - green) * factor, blue: blue + (1 - blue) * factor, alpha: 1)
+                }
+            }
+    }()
 }

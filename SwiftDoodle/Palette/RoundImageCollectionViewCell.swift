@@ -3,6 +3,8 @@ import UIKit
 class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
     @IBOutlet fileprivate weak var imageView: UIImageView!
 
+    var longPressCallback: ((UILongPressGestureRecognizer) -> Void)?
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -10,9 +12,16 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
         imageView.layer.masksToBounds = true
 
         backgroundColor = .clear
+
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(RoundImageCollectionViewCell.longPressGesutreRecognizerWasActivated(gestureRecognizer:)))
+        longPressGestureRecognizer.minimumPressDuration = 1
+
+        contentView.addGestureRecognizer(longPressGestureRecognizer)
     }
 
-    func present(color: UIColor) {
+    func present(color: UIColor, longPressCallback: @escaping (UILongPressGestureRecognizer) -> Void) {
+        self.longPressCallback = longPressCallback
+
         imageView.image = UIImage.from(color: color, with: imageView.bounds.size)
 
         if let colorComponents = color.cgColor.components, colorComponents.count >= 3 {
@@ -26,5 +35,10 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
         didSet {
             imageView.layer.borderWidth = isSelected ? 2.5 : 0
         }
+    }
+
+    @objc
+    func longPressGesutreRecognizerWasActivated(gestureRecognizer: UILongPressGestureRecognizer) {
+        longPressCallback?(gestureRecognizer)
     }
 }
