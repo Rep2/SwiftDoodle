@@ -1,8 +1,8 @@
 import SnapKit
 import UIKit
 
-class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
-    lazy var imageView: UIImageView = {
+open class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
+    open lazy var imageView: UIImageView = {
         let imageView = UIImageView()
 
         imageView.contentMode = .scaleAspectFit
@@ -10,10 +10,10 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
         return imageView
     }()
 
-    var color: UIColor?
+    open var color: UIColor?
     var longPressCallback: ((UILongPressGestureRecognizer) -> Void)?
 
-    override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
 
         addSubview(imageView)
@@ -30,7 +30,7 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
         contentView.addGestureRecognizer(longPressGestureRecognizer)
     }
 
-    func present(color: UIColor, cornerRadius: CGFloat, longPressCallback: @escaping (UILongPressGestureRecognizer) -> Void) {
+    open func present(color: UIColor, cornerRadius: CGFloat, longPressCallback: @escaping (UILongPressGestureRecognizer) -> Void) {
         self.longPressCallback = longPressCallback
         self.color = color
 
@@ -44,7 +44,7 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
         }
     }
 
-    override var isSelected: Bool {
+    open override var isSelected: Bool {
         didSet {
             guard color != .white else {
                 imageView.layer.borderWidth = 2.5
