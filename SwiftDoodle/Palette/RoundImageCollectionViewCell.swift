@@ -10,6 +10,7 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
         return imageView
     }()
 
+    var color: UIColor?
     var longPressCallback: ((UILongPressGestureRecognizer) -> Void)?
 
     override func layoutSubviews() {
@@ -31,6 +32,7 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
 
     func present(color: UIColor, cornerRadius: CGFloat, longPressCallback: @escaping (UILongPressGestureRecognizer) -> Void) {
         self.longPressCallback = longPressCallback
+        self.color = color
 
         imageView.image = UIImage.from(color: color, with: contentView.bounds.size)
         imageView.layer.cornerRadius = cornerRadius
@@ -41,10 +43,20 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
 
             imageView.layer.borderColor = inverseColor.cgColor
         }
+
+        if color == .white {
+            imageView.layer.borderWidth = 2.5
+        }
     }
 
     override var isSelected: Bool {
         didSet {
+            guard color != .white else {
+                imageView.layer.borderWidth = 2.5
+
+                return
+            }
+
             imageView.layer.borderWidth = isSelected ? 2.5 : 0
         }
     }
