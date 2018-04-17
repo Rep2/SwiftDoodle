@@ -1,0 +1,3 @@
+[submodule "Carthage/Checkouts/Chameleon"]
+	path = Carthage/Checkouts/Chameleon
+	url = https://github.com/viccalexander/Chameleon.git

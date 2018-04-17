@@ -2,8 +2,7 @@ platform :ios, '10.0'
 
 target 'SwiftDoodle' do
   use_frameworks!
- 
-  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+
   pod 'SnapKit', '~> 4.0.0'
 
   target 'SwiftDoodleTests' do

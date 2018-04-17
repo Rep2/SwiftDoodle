@@ -1,26 +1,16 @@
 PODS:
-  - ChameleonFramework/Default (2.1.0)
-  - ChameleonFramework/Swift (2.1.0):
-    - ChameleonFramework/Default
   - SnapKit (4.0.0)
 
 DEPENDENCIES:
-  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - SnapKit (~> 4.0.0)
 
-EXTERNAL SOURCES:
-  ChameleonFramework:
-    :git: https://github.com/ViccAlexander/Chameleon.git
-
-CHECKOUT OPTIONS:
-  ChameleonFramework:
-    :commit: 6dd284bde21ea2e7f9fd89bc36f40df16e16369d
-    :git: https://github.com/ViccAlexander/Chameleon.git
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - SnapKit
 
 SPEC CHECKSUMS:
-  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 48efead8ea96cd99bd849850d5b0cdb7729d1875
+PODFILE CHECKSUM: 50bf35c91f57eb2ddd040a6f2b12b56709e0fcb9
 
-COCOAPODS: 1.4.0.beta.2
+COCOAPODS: 1.5.0

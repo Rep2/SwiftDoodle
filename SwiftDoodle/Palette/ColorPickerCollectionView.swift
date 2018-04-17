@@ -11,14 +11,14 @@ public protocol ColorPickerCollectionViewEventHandler: class {
 extension ColorPickerCollectionViewEventHandler {
     public var colors: [UIColor] {
         return [
-            UIColor.flatRed,
-            UIColor.flatOrange,
-            UIColor.flatYellow,
-            UIColor.flatGreen,
-            UIColor.flatMintDark,
-            UIColor.flatSkyBlue,
-            UIColor.flatBlueDark,
-            UIColor.flatPurple,
+            UIColor.flatRed(),
+            UIColor.flatOrange(),
+            UIColor.flatYellow(),
+            UIColor.flatGreen(),
+            UIColor.flatMintColorDark(),
+            UIColor.flatSkyBlue(),
+            UIColor.flatBlueColorDark(),
+            UIColor.flatPurple(),
             UIColor.white,
             UIColor.black
         ]

@@ -35,6 +35,8 @@
 		F66C86872080285A0010DBA1 /* RGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C86862080285A0010DBA1 /* RGBColor.swift */; };
 		F67ECD622076637F00780744 /* ColorSaturation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67ECD612076637F00780744 /* ColorSaturation.swift */; };
 		F6AE8CB41FC26CAF00EC1E6C /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AE8CB31FC26CAF00EC1E6C /* PaletteView.swift */; };
+		F6B717BC208599350061BD80 /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E137192085977D009DF4DE /* Chameleon.framework */; };
+		F6B717BD2085993C0061BD80 /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E137192085977D009DF4DE /* Chameleon.framework */; };
 		F6E137152085871B009DF4DE /* ColorPickerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E137142085871B009DF4DE /* ColorPickerCollectionView.swift */; };
 		F6E249F51FC45DF300A1DC87 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E249F41FC45DF300A1DC87 /* DrawView.swift */; };
 		F6E249F71FC462FB00A1DC87 /* PaletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E249F61FC462FB00A1DC87 /* PaletteViewModel.swift */; };
@@ -135,6 +137,7 @@
 		F67ECD612076637F00780744 /* ColorSaturation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSaturation.swift; sourceTree = "<group>"; };
 		F6AE8CB31FC26CAF00EC1E6C /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		F6E137142085871B009DF4DE /* ColorPickerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerCollectionView.swift; sourceTree = "<group>"; };
+		F6E137192085977D009DF4DE /* Chameleon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chameleon.framework; path = Carthage/Build/iOS/Chameleon.framework; sourceTree = "<group>"; };
 		F6E249F41FC45DF300A1DC87 /* DrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		F6E249F61FC462FB00A1DC87 /* PaletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteViewModel.swift; sourceTree = "<group>"; };
 		F6E249F81FC4757300A1DC87 /* PaletteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaletteView.xib; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F089B5B4B191690AC74DE29F /* Pods_SwiftDoodle.framework in Frameworks */,
+				F6B717BD2085993C0061BD80 /* Chameleon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +170,7 @@
 			files = (
 				F65F00C31FBF2C5C00B55058 /* SwiftDoodle.framework in Frameworks */,
 				68FC3FE32BB7DADD3A5BB0F6 /* Pods_SwiftDoodleDemo.framework in Frameworks */,
+				F6B717BC208599350061BD80 /* Chameleon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +213,7 @@
 		68BAC94E64E304D597638C96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F6E137192085977D009DF4DE /* Chameleon.framework */,
 				AB57658AA19F5603B8A6FDD6 /* Pods_SwiftDoodle.framework */,
 				0B3706C393030E53B24A3C20 /* Pods_SwiftDoodleDemo.framework */,
 				CF0E64F93CD86A9C02D1C82F /* Pods_SwiftDoodleDemoTests.framework */,
@@ -371,9 +377,9 @@
 				F66429031FBF27B100317721 /* Sources */,
 				F66429041FBF27B100317721 /* Frameworks */,
 				F66429051FBF27B100317721 /* Headers */,
+				F6E1371820859764009DF4DE /* Carthage */,
 				F66429061FBF27B100317721 /* Resources */,
 				F66429541FBF28E200317721 /* Swiftlint */,
-				01A35D11D5D85FBC60A5696F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -393,7 +399,6 @@
 				F664290E1FBF27B100317721 /* Frameworks */,
 				F664290F1FBF27B100317721 /* Resources */,
 				6AAD8384C80EAADD6200C5E9 /* [CP] Embed Pods Frameworks */,
-				DF2C04242B08E8079647B59A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -414,9 +419,9 @@
 				F66429231FBF286F00317721 /* Frameworks */,
 				F66429241FBF286F00317721 /* Resources */,
 				F66429551FBF28FF00317721 /* Swiftlint */,
+				F6B717BB208599130061BD80 /* Carthage */,
 				F65F00C71FBF2C5C00B55058 /* Embed Frameworks */,
 				9030CDD56F1CB02552F25FD9 /* [CP] Embed Pods Frameworks */,
-				DF2C7DF6F47EBAB907643081 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -436,8 +441,6 @@
 				F66429351FBF286F00317721 /* Sources */,
 				F66429361FBF286F00317721 /* Frameworks */,
 				F66429371FBF286F00317721 /* Resources */,
-				067AC8904718B0411B2342AD /* [CP] Embed Pods Frameworks */,
-				F84784397E5DDB6F073AF6D3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -457,8 +460,6 @@
 				F66429401FBF286F00317721 /* Sources */,
 				F66429411FBF286F00317721 /* Frameworks */,
 				F66429421FBF286F00317721 /* Resources */,
-				5CC313E1D0FD2D5B8426BD48 /* [CP] Embed Pods Frameworks */,
-				F5547E54E8B7C6BDA44902C9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -477,7 +478,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Ivan Rep";
 				TargetAttributes = {
 					F66429071FBF27B100317721 = {
@@ -572,36 +573,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		01A35D11D5D85FBC60A5696F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodle/Pods-SwiftDoodle-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		067AC8904718B0411B2342AD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodleDemoTests/Pods-SwiftDoodleDemoTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1C58DBD02E6EAF37689FFAF3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -638,21 +609,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5CC313E1D0FD2D5B8426BD48 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodleDemoUITests/Pods-SwiftDoodleDemoUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6AAD8384C80EAADD6200C5E9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -660,12 +616,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodleTests/Pods-SwiftDoodleTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -681,12 +635,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodleDemo/Pods-SwiftDoodleDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -747,51 +699,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DF2C04242B08E8079647B59A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodleTests/Pods-SwiftDoodleTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DF2C7DF6F47EBAB907643081 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodleDemo/Pods-SwiftDoodleDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F5547E54E8B7C6BDA44902C9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodleDemoUITests/Pods-SwiftDoodleDemoUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F66429541FBF28E200317721 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -820,20 +727,35 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		F84784397E5DDB6F073AF6D3 /* [CP] Copy Pods Resources */ = {
+		F6B717BB208599130061BD80 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = Carthage;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDoodleDemoTests/Pods-SwiftDoodleDemoTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		F6E1371820859764009DF4DE /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -951,6 +873,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -958,6 +881,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1011,6 +935,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1018,6 +943,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1054,6 +980,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1FBD8D3373559AFC2625D02 /* Pods-SwiftDoodle.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1063,6 +990,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SwiftDoodle/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1081,6 +1012,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A512B59AE5FF749BC5749CD3 /* Pods-SwiftDoodle.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1090,6 +1022,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SwiftDoodle/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1107,7 +1043,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4BE40757E598BEB986377FF5 /* Pods-SwiftDoodleTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MDX989Y6D8;
 				INFOPLIST_FILE = SwiftDoodleTests/Info.plist;
@@ -1123,7 +1059,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 509B1B663D11EA0C6BE7EB01 /* Pods-SwiftDoodleTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MDX989Y6D8;
 				INFOPLIST_FILE = SwiftDoodleTests/Info.plist;
@@ -1139,10 +1075,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89FDC6694B877D6D5BE1AD19 /* Pods-SwiftDoodleDemo.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MDX989Y6D8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SwiftDoodleDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1157,10 +1097,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 803E97F4F7F745224DAE77D8 /* Pods-SwiftDoodleDemo.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MDX989Y6D8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SwiftDoodleDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

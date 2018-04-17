@@ -1,5 +1,5 @@
 import UIKit
-import ChameleonFramework
+import Chameleon
 
 public protocol PaletteViewEventHandler: class {
     func modelDidChange(viewModel: PaletteViewModel)
@@ -32,10 +32,10 @@ public final class PaletteView: UIView, FromNib {
         drawToolSegmentedControl.layer.cornerRadius = drawToolSegmentedControl.bounds.height / 2
         drawToolSegmentedControl.layer.borderWidth = 1
         drawToolSegmentedControl.layer.masksToBounds = true
-        drawToolSegmentedControl.layer.borderColor = UIColor.flatSkyBlue.cgColor
-        drawToolSegmentedControl.tintColor = UIColor.flatSkyBlue
+        drawToolSegmentedControl.layer.borderColor = UIColor.flatSkyBlue().cgColor
+        drawToolSegmentedControl.tintColor = UIColor.flatSkyBlue()
 
-        drawWidthSlider.tintColor = UIColor.flatSkyBlue
+        drawWidthSlider.tintColor = UIColor.flatSkyBlue()
 
         layer.shadowOpacity = 0.3
         layer.cornerRadius = 10
