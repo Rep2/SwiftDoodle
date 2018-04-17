@@ -10,6 +10,7 @@
 		F60668FF20859DDB00E8AD11 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F60668FE20859DDB00E8AD11 /* SnapKit.framework */; };
 		F60669012085AD8A00E8AD11 /* SwiftViewModels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F60669002085AD8A00E8AD11 /* SwiftViewModels.framework */; };
 		F607F1181FC60F810014409A /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F607F1171FC60F810014409A /* CanvasViewController.swift */; };
+		F64539072085BA4400E4C2EB /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64539062085BA4400E4C2EB /* UIColor.swift */; };
 		F65402E21FC0E82700A9E39B /* SafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65402E11FC0E82700A9E39B /* SafeArray.swift */; };
 		F65F00C31FBF2C5C00B55058 /* SwiftDoodle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; };
 		F65F00C41FBF2C5C00B55058 /* SwiftDoodle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F66429081FBF27B100317721 /* SwiftDoodle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -90,6 +91,7 @@
 		F60668FE20859DDB00E8AD11 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		F60669002085AD8A00E8AD11 /* SwiftViewModels.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftViewModels.framework; path = Carthage/Build/iOS/SwiftViewModels.framework; sourceTree = "<group>"; };
 		F607F1171FC60F810014409A /* CanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
+		F64539062085BA4400E4C2EB /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		F65402E11FC0E82700A9E39B /* SafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeArray.swift; sourceTree = "<group>"; };
 		F65F00C81FBF5E0F00B55058 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		F65F00CA1FBF647800B55058 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				F65F00D11FBF6F6000B55058 /* CGContext.swift */,
 				F67ECD612076637F00780744 /* ColorSaturation.swift */,
 				F66C86862080285A0010DBA1 /* RGBColor.swift */,
+				F64539062085BA4400E4C2EB /* UIColor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				F6E249F51FC45DF300A1DC87 /* DrawView.swift in Sources */,
 				F607F1181FC60F810014409A /* CanvasViewController.swift in Sources */,
 				F65F00C91FBF5E0F00B55058 /* Point.swift in Sources */,
+				F64539072085BA4400E4C2EB /* UIColor.swift in Sources */,
 				F66C86872080285A0010DBA1 /* RGBColor.swift in Sources */,
 				F6624BF21FC5D95800CC784A /* ImageFromColor.swift in Sources */,
 				F67ECD622076637F00780744 /* ColorSaturation.swift in Sources */,

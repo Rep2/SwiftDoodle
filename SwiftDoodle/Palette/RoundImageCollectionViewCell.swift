@@ -37,12 +37,7 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
         imageView.image = UIImage.from(color: color, with: contentView.bounds.size)
         imageView.layer.cornerRadius = cornerRadius
         imageView.layer.masksToBounds = true
-
-        if let colorComponents = color.cgColor.components, colorComponents.count >= 3 {
-            let inverseColor = UIColor(red: 1 - colorComponents[0], green: 1 - colorComponents[1], blue: 1 - colorComponents[2], alpha: 1)
-
-            imageView.layer.borderColor = inverseColor.cgColor
-        }
+        imageView.layer.borderColor = color.invers.cgColor
 
         if color == .white {
             imageView.layer.borderWidth = 2.5
