@@ -36,7 +36,7 @@ public class ColorPickerCollectionView: UICollectionView {
         }
     }
 
-    var colors = [UIColor]()
+    public var colors = [UIColor]()
 
     let colorSaturationSliderWidth: Float = 164
 
@@ -59,16 +59,20 @@ public class ColorPickerCollectionView: UICollectionView {
         return slider
     }()
 
-    public override func awakeFromNib() {
-        super.awakeFromNib()
+    public override func layoutSubviews() {
+        super.layoutSubviews()
 
         dataSource = self
         layer.masksToBounds = false
+
+        registerNib(cellType: RoundImageCollectionViewCell.self)
     }
 }
 
 extension ColorPickerCollectionView: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(colors.count)
+
         return colors.count
     }
 

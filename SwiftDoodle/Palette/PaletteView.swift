@@ -40,8 +40,6 @@ public final class PaletteView: UIView, FromNib {
         layer.shadowOpacity = 0.3
         layer.cornerRadius = 10
 
-        colorPickerImageView.registerNib(cellType: RoundImageCollectionViewCell.self)
-
         brushSizePreview.snp.makeConstraints { make in
             make.height.width.equalTo(50)
             make.right.equalTo(self.snp.left).offset(-16)

@@ -8,7 +8,7 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        imageView.layer.cornerRadius = imageView.bounds.height / 2
+        imageView.layer.cornerRadius = self.bounds.height / 2
         imageView.layer.masksToBounds = true
 
         backgroundColor = .clear

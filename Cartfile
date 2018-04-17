@@ -1,1 +1,4 @@
+github "SnapKit/SnapKit" ~> 4.0.0
 github "viccalexander/Chameleon" ~> 2.2.0
+
+github "Rep2/SwiftViewModels"
