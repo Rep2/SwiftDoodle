@@ -3,6 +3,7 @@ import SnapKit
 
 public protocol ColorPickerCollectionViewEventHandler: class {
     var colors: [UIColor] { get }
+    var cellItemCornerRadius: CGFloat { get }
 
     func didPreviews(color: UIColor)
     func didEndPicking(color: UIColor)
@@ -22,6 +23,10 @@ extension ColorPickerCollectionViewEventHandler {
             UIColor.white,
             UIColor.black
         ]
+    }
+
+    public var cellItemCornerRadius: CGFloat {
+        return 25
     }
 }
 
@@ -80,7 +85,7 @@ extension ColorPickerCollectionView: UICollectionViewDataSource {
         let cell = collectionView.cell(for: indexPath) as RoundImageCollectionViewCell
 
         if let color = colors.get(atIndex: indexPath.row) {
-            cell.present(color: color, longPressCallback: didLongPressCellCallback(at: indexPath))
+            cell.present(color: color, cornerRadius: eventHandler?.cellItemCornerRadius ?? 25, longPressCallback: didLongPressCellCallback(at: indexPath))
         }
 
         return cell

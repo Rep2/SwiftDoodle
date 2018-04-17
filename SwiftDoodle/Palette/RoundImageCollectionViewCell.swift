@@ -21,11 +21,6 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
             make.edges.equalTo(contentView)
         }
 
-        print(contentView.bounds)
-
-        imageView.layer.cornerRadius = contentView.bounds.height / 2
-        imageView.layer.masksToBounds = true
-
         backgroundColor = .clear
 
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(RoundImageCollectionViewCell.longPressGesutreRecognizerWasActivated(gestureRecognizer:)))
@@ -34,10 +29,12 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
         contentView.addGestureRecognizer(longPressGestureRecognizer)
     }
 
-    func present(color: UIColor, longPressCallback: @escaping (UILongPressGestureRecognizer) -> Void) {
+    func present(color: UIColor, cornerRadius: CGFloat, longPressCallback: @escaping (UILongPressGestureRecognizer) -> Void) {
         self.longPressCallback = longPressCallback
 
         imageView.image = UIImage.from(color: color, with: contentView.bounds.size)
+        imageView.layer.cornerRadius = cornerRadius
+        imageView.layer.masksToBounds = true
 
         if let colorComponents = color.cgColor.components, colorComponents.count >= 3 {
             let inverseColor = UIColor(red: 1 - colorComponents[0], green: 1 - colorComponents[1], blue: 1 - colorComponents[2], alpha: 1)
