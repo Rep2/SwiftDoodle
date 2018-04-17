@@ -65,7 +65,7 @@ public class ColorPickerCollectionView: UICollectionView {
         dataSource = self
         layer.masksToBounds = false
 
-        registerNib(cellType: RoundImageCollectionViewCell.self)
+        registerCell(cellType: RoundImageCollectionViewCell.self)
     }
 }
 

@@ -5,6 +5,10 @@ extension UICollectionView {
         register(UINib(nibName: cellType.identifier, bundle: Bundle(for: PaletteView.self)), forCellWithReuseIdentifier: cellType.identifier)
     }
 
+    func registerCell<T: UICollectionViewCell>(cellType: T.Type) {
+        register(cellType, forCellWithReuseIdentifier: String(describing: cellType.self))
+    }
+
     func cell<T: UICollectionViewCell>(for indexPath: IndexPath) -> T where T: Identifiable {
         if let cell = dequeueReusableCell(withReuseIdentifier: T.identifier, for: indexPath) as? T {
             return cell

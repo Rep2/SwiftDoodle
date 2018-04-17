@@ -1,14 +1,29 @@
+import SnapKit
 import UIKit
 
 class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
-    @IBOutlet fileprivate weak var imageView: UIImageView!
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+
+        imageView.contentMode = .scaleAspectFit
+
+        return imageView
+    }()
 
     var longPressCallback: ((UILongPressGestureRecognizer) -> Void)?
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func layoutSubviews() {
+        super.layoutSubviews()
 
-        imageView.layer.cornerRadius = self.bounds.height / 2
+        addSubview(imageView)
+
+        imageView.snp.makeConstraints { make in
+            make.edges.equalTo(contentView)
+        }
+
+        print(contentView.bounds)
+
+        imageView.layer.cornerRadius = contentView.bounds.height / 2
         imageView.layer.masksToBounds = true
 
         backgroundColor = .clear
@@ -22,7 +37,7 @@ class RoundImageCollectionViewCell: UICollectionViewCell, Identifiable {
     func present(color: UIColor, longPressCallback: @escaping (UILongPressGestureRecognizer) -> Void) {
         self.longPressCallback = longPressCallback
 
-        imageView.image = UIImage.from(color: color, with: imageView.bounds.size)
+        imageView.image = UIImage.from(color: color, with: contentView.bounds.size)
 
         if let colorComponents = color.cgColor.components, colorComponents.count >= 3 {
             let inverseColor = UIColor(red: 1 - colorComponents[0], green: 1 - colorComponents[1], blue: 1 - colorComponents[2], alpha: 1)
