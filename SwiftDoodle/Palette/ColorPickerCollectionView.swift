@@ -5,8 +5,8 @@ public protocol ColorPickerCollectionViewEventHandler: class {
     var colors: [UIColor] { get }
     var cellItemCornerRadius: CGFloat { get }
 
-    func didPreviews(color: UIColor)
-    func didEndPicking(color: UIColor)
+    func colorPicker(_ colorPicker: ColorPickerCollectionView, didPreviewColor color: UIColor)
+    func colorPicker(_ colorPicker: ColorPickerCollectionView, didPickColor color: UIColor)
 }
 
 extension ColorPickerCollectionViewEventHandler {
@@ -28,6 +28,9 @@ extension ColorPickerCollectionViewEventHandler {
     public var cellItemCornerRadius: CGFloat {
         return 25
     }
+
+    public func colorPicker(_ colorPicker: ColorPickerCollectionView, didPreviewColor color: UIColor) {}
+    public func colorPicker(_ colorPicker: ColorPickerCollectionView, didPickColor color: UIColor) {}
 }
 
 public class ColorPickerCollectionView: UICollectionView {
@@ -120,7 +123,7 @@ extension ColorPickerCollectionView: UICollectionViewDataSource {
 
                 strongSelf.selectItem(at: indexPath, animated: false, scrollPosition: .top)
 
-                initialColor.flatMap { strongSelf.eventHandler?.didPreviews(color: $0) }
+                initialColor.flatMap { strongSelf.eventHandler?.colorPicker(strongSelf, didPreviewColor: $0) }
             case .changed:
                 let xChange = newXLocation - startXPosition
                 let boundedSliderChange = max(min(xChange / (strongSelf.colorSaturationSliderWidth / 2), 1), -1)
@@ -130,11 +133,11 @@ extension ColorPickerCollectionView: UICollectionViewDataSource {
 
                 strongSelf.colorSaturationSlider.setValue(shiftedSliderChange, animated: true)
 
-                shiftedColor.flatMap { strongSelf.eventHandler?.didPreviews(color: $0) }
+                shiftedColor.flatMap { strongSelf.eventHandler?.colorPicker(strongSelf, didPreviewColor: $0) }
             case .ended, .cancelled, .failed:
                 strongSelf.colorSaturationSlider.isHidden = true
 
-                shiftedColor.flatMap { strongSelf.eventHandler?.didEndPicking(color: $0) }
+                shiftedColor.flatMap { strongSelf.eventHandler?.colorPicker(strongSelf, didPickColor: $0) }
             default:
                 break
             }

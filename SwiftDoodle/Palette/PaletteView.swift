@@ -132,14 +132,14 @@ extension PaletteView: UICollectionViewDelegate {
 }
 
 extension PaletteView: ColorPickerCollectionViewEventHandler {
-    public func didPreviews(color: UIColor) {
+    public func colorPicker(_ colorPicker: ColorPickerCollectionView, didPreviewColor color: UIColor) {
         brushSizePreview.isHidden = false
         updateBrushSizePreview(to: 54)
 
         brushSizePreview.backgroundColor = color
     }
 
-    public func didEndPicking(color: UIColor) {
+    public func colorPicker(_ colorPicker: ColorPickerCollectionView, didPickColor color: UIColor) {
         brushSizePreview.isHidden = true
 
         if let viewModel = viewModel {
