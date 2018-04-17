@@ -2,12 +2,41 @@ import UIKit
 import SnapKit
 
 public protocol ColorPickerCollectionViewEventHandler: class {
+    var colors: [UIColor] { get }
+
     func didPreviews(color: UIColor)
     func didEndPicking(color: UIColor)
 }
 
+extension ColorPickerCollectionViewEventHandler {
+    public var colors: [UIColor] {
+        return [
+            UIColor.flatRed,
+            UIColor.flatOrange,
+            UIColor.flatYellow,
+            UIColor.flatGreen,
+            UIColor.flatMintDark,
+            UIColor.flatSkyBlue,
+            UIColor.flatBlueDark,
+            UIColor.flatPurple,
+            UIColor.white,
+            UIColor.black
+        ]
+    }
+}
+
 public class ColorPickerCollectionView: UICollectionView {
-    public weak var eventHandler: ColorPickerCollectionViewEventHandler?
+    public weak var eventHandler: ColorPickerCollectionViewEventHandler? {
+        didSet {
+            guard let eventHandler = eventHandler else { return }
+
+            self.colors = eventHandler.colors
+
+            reloadData()
+        }
+    }
+
+    var colors = [UIColor]()
 
     let colorSaturationSliderWidth: Float = 164
 
@@ -40,13 +69,13 @@ public class ColorPickerCollectionView: UICollectionView {
 
 extension ColorPickerCollectionView: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return colors.count
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.cell(for: indexPath) as RoundImageCollectionViewCell
 
-        if let color = PaletteView.paletteColors.get(atIndex: indexPath.row) {
+        if let color = colors.get(atIndex: indexPath.row) {
             cell.present(color: color, longPressCallback: didLongPressCellCallback(at: indexPath))
         }
 
@@ -59,7 +88,7 @@ extension ColorPickerCollectionView: UICollectionViewDataSource {
 
     func didLongPressCellCallback(at indexPath: IndexPath) -> (UILongPressGestureRecognizer) -> Void {
         var startXPosition: Float!
-        let initialColor = PaletteView.paletteColors.get(atIndex: indexPath.row)
+        let initialColor = colors.get(atIndex: indexPath.row)
         var shiftedColor: UIColor?
 
         return { [weak self] gestureRecognizer in

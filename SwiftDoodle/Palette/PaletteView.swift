@@ -122,7 +122,7 @@ public final class PaletteView: UIView, FromNib {
 
 extension PaletteView: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let viewModel = viewModel, let selectedColor = PaletteView.paletteColors.get(atIndex: indexPath.row) {
+        if let viewModel = viewModel, let selectedColor = colors.get(atIndex: indexPath.row) {
             viewModel.color = selectedColor
 
             viewModel.tool = .pencil
@@ -153,21 +153,4 @@ extension PaletteView: ColorPickerCollectionViewEventHandler {
             eventHandler?.modelDidChange(viewModel: viewModel)
         }
     }
-}
-
-extension PaletteView {
-    static let paletteColors: [UIColor] = {
-        return [
-            UIColor.flatRed,
-            UIColor.flatOrange,
-            UIColor.flatYellow,
-            UIColor.flatGreen,
-            UIColor.flatMintDark,
-            UIColor.flatSkyBlue,
-            UIColor.flatBlueDark,
-            UIColor.flatPurple,
-            UIColor.white,
-            UIColor.black
-        ]
-    }()
 }
