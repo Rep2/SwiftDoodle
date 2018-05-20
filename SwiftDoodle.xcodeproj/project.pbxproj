@@ -336,7 +336,6 @@
 				F66429031FBF27B100317721 /* Sources */,
 				F66429041FBF27B100317721 /* Frameworks */,
 				F66429051FBF27B100317721 /* Headers */,
-				F6E1371820859764009DF4DE /* Carthage */,
 				F66429061FBF27B100317721 /* Resources */,
 				F66429541FBF28E200317721 /* Swiftlint */,
 			);
@@ -563,26 +562,6 @@
 			);
 			name = Carthage;
 			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		F6E1371820859764009DF4DE /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftViewModels.framework",
-			);
-			name = Carthage;
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Chameleon.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftViewModels.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
