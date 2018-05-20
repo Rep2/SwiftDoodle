@@ -79,8 +79,6 @@ public class ColorPickerCollectionView: UICollectionView {
 
 extension ColorPickerCollectionView: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(colors.count)
-
         return colors.count
     }
 
