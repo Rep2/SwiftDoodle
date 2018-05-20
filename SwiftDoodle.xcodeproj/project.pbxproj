@@ -32,7 +32,6 @@
 		F66C86872080285A0010DBA1 /* RGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C86862080285A0010DBA1 /* RGBColor.swift */; };
 		F67ECD622076637F00780744 /* ColorSaturation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67ECD612076637F00780744 /* ColorSaturation.swift */; };
 		F6AE8CB41FC26CAF00EC1E6C /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AE8CB31FC26CAF00EC1E6C /* PaletteView.swift */; };
-		F6B717BC208599350061BD80 /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E137192085977D009DF4DE /* Chameleon.framework */; };
 		F6B717BD2085993C0061BD80 /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E137192085977D009DF4DE /* Chameleon.framework */; };
 		F6E137152085871B009DF4DE /* ColorPickerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E137142085871B009DF4DE /* ColorPickerCollectionView.swift */; };
 		F6E249F51FC45DF300A1DC87 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E249F41FC45DF300A1DC87 /* DrawView.swift */; };
@@ -153,7 +152,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F65F00C31FBF2C5C00B55058 /* SwiftDoodle.framework in Frameworks */,
-				F6B717BC208599350061BD80 /* Chameleon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +557,8 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftViewModels.framework",
 			);
 			name = Carthage;
 			outputPaths = (
