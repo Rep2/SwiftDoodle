@@ -89,6 +89,8 @@ extension ColorPickerCollectionView: UICollectionViewDataSource {
             cell.present(color: color, cornerRadius: eventHandler?.cellItemCornerRadius ?? 25, longPressCallback: didLongPressCellCallback(at: indexPath))
         }
 
+        cell.isSelected = true
+
         return cell
     }
 
