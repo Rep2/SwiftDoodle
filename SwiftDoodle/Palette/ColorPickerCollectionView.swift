@@ -46,7 +46,7 @@ public class ColorPickerCollectionView: UICollectionView {
 
     public var colors = [UIColor]()
 
-    var selectedColorIndex: Int?
+    public var selectedColorIndex: Int?
 
     let colorSaturationSliderWidth: Float = 164
 
