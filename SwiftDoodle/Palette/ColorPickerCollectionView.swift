@@ -69,7 +69,7 @@ public class ColorPickerCollectionView: UICollectionView {
         return slider
     }()
 
-    func reloadData(selectedColor: UIColor?) {
+    public func reloadData(selectedColor: UIColor?) {
         self.selectedColor = selectedColor
 
         reloadData()
