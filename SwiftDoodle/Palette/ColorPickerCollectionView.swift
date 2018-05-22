@@ -4,6 +4,7 @@ import SnapKit
 public protocol ColorPickerCollectionViewEventHandler: class {
     var colors: [UIColor] { get }
     var cellItemCornerRadius: CGFloat { get }
+    var handleLongPress: Bool { get }
 
     func colorPicker(_ colorPicker: ColorPickerCollectionView, didPreviewColor color: UIColor)
     func colorPicker(_ colorPicker: ColorPickerCollectionView, didPickColor color: UIColor)
@@ -29,6 +30,10 @@ extension ColorPickerCollectionViewEventHandler {
         return 25
     }
 
+    public var handleLongPress: Bool {
+        return true
+    }
+
     public func colorPicker(_ colorPicker: ColorPickerCollectionView, didPreviewColor color: UIColor) {}
     public func colorPicker(_ colorPicker: ColorPickerCollectionView, didPickColor color: UIColor) {}
 }
@@ -45,8 +50,6 @@ public class ColorPickerCollectionView: UICollectionView {
     }
 
     public var colors = [UIColor]()
-
-    public var selectedColorIndex: Int?
 
     let colorSaturationSliderWidth: Float = 164
 
@@ -89,10 +92,6 @@ extension ColorPickerCollectionView: UICollectionViewDataSource {
 
         if let color = colors.get(atIndex: indexPath.row) {
             cell.present(color: color, cornerRadius: eventHandler?.cellItemCornerRadius ?? 25, longPressCallback: didLongPressCellCallback(at: indexPath))
-
-            if let selectedColorIndex = selectedColorIndex, selectedColorIndex == indexPath.row {
-                cell.isSelected = true
-            }
         }
 
         return cell
@@ -103,6 +102,8 @@ extension ColorPickerCollectionView: UICollectionViewDataSource {
     }
 
     func didLongPressCellCallback(at indexPath: IndexPath) -> (UILongPressGestureRecognizer) -> Void {
+        guard let eventHandler = eventHandler, eventHandler.handleLongPress else { return { _ in } }
+
         var startXPosition: Float!
         let initialColor = colors.get(atIndex: indexPath.row)
         var shiftedColor: UIColor?
