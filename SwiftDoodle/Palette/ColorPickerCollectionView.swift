@@ -46,6 +46,8 @@ public class ColorPickerCollectionView: UICollectionView {
 
     public var colors = [UIColor]()
 
+    var selectedColor: UIColor?
+
     let colorSaturationSliderWidth: Float = 164
 
     lazy var colorSaturationSlider: UISlider = {
@@ -67,6 +69,12 @@ public class ColorPickerCollectionView: UICollectionView {
         return slider
     }()
 
+    func reloadData(selectedColor: UIColor?) {
+        self.selectedColor = selectedColor
+
+        reloadData()
+    }
+
     public override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -87,9 +95,12 @@ extension ColorPickerCollectionView: UICollectionViewDataSource {
 
         if let color = colors.get(atIndex: indexPath.row) {
             cell.present(color: color, cornerRadius: eventHandler?.cellItemCornerRadius ?? 25, longPressCallback: didLongPressCellCallback(at: indexPath))
-        }
 
-        cell.isSelected = true
+            if let selectedColor = selectedColor,
+                selectedColor == color {
+                cell.isSelected = true
+            }
+        }
 
         return cell
     }
