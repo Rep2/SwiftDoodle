@@ -90,8 +90,7 @@ extension ColorPickerCollectionView: UICollectionViewDataSource {
         if let color = colors.get(atIndex: indexPath.row) {
             cell.present(color: color, cornerRadius: eventHandler?.cellItemCornerRadius ?? 25, longPressCallback: didLongPressCellCallback(at: indexPath))
 
-            if let selectedColorIndex = selectedColorIndex,
-                selectedColorIndex == indexPath.row {
+            if let selectedColorIndex = selectedColorIndex, selectedColorIndex == indexPath.row {
                 cell.isSelected = true
             }
         }
